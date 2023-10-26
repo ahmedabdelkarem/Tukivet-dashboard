@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/b7ad2be9-777c-446a-92c8-3f953c44ce02/resourceGroups/TukivetDashboard/providers/Microsoft.Web/sites/TukivetDashboard",
+    "appService.deploySubpath": "dist\\admin"
+}
