@@ -1,0 +1,160 @@
+<div class="px-4 py-2">
+  <div class="grid gap-2 sticky top-0 bg-white">
+    <div class="flex justify-between items-center my-3">
+      <div class="flex gap-3">
+        <img src="assets/images/department.svg" />
+        <span class="text-xl font-bold">Add New Department </span>
+      </div>
+
+      <img
+        src="assets/images/close-popup.svg"
+        class="cursor-pointer"
+        (click)="dialogRef.close()"
+      />
+    </div>
+    <hr />
+  </div>
+  <form
+    [formGroup]="form"
+    class="flex flex-col mb-4 p-4"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="grid gap-2 grid-cols-2">
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          organization
+        </label>
+        <input
+          formControlName="organization"
+
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline"
+          type="text"
+          placeholder="organization"
+
+        />
+      </div>
+    </div>
+    <div class="grid gap-2 grid-cols-2">
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          Name In Arabic <span class="required-label">*</span>
+        </label>
+        <input
+          formControlName="nameArabic"
+          required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline focus:border-[#056A3A]"
+          type="text"
+          placeholder="Name Arabic"
+          [ngClass]="{'focus:border-red-500 border-red-500':    form.controls.nameArabic.hasError('required') &&
+          (form.controls.nameArabic.touched || form.controls.nameArabic.dirty)}"
+        />
+
+        <p
+          class="text-red-500 text-xs italic mt-2"
+          *ngIf="
+            form.controls.nameArabic.hasError('required') &&
+            (form.controls.nameArabic.touched || form.controls.nameArabic.dirty)
+          "
+        >
+          Name Arabic is Required
+        </p>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          Address in English <span class="required-label">*</span>
+        </label>
+        <input
+          formControlName="addressEnglish"
+          required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline focus:border-[#056A3A]"
+          type="text"
+          placeholder="Address English"
+          [ngClass]="{'focus:border-red-500 border-red-500':   form.controls.addressEnglish.hasError('required') &&
+          (form.controls.addressEnglish.touched ||
+            form.controls.addressEnglish.dirty)}"
+        />
+
+        <p
+          class="text-red-500 text-xs italic mt-2"
+          *ngIf="
+            form.controls.addressEnglish.hasError('required') &&
+            (form.controls.addressEnglish.touched ||
+              form.controls.addressEnglish.dirty)
+          "
+        >
+          Address English is Required
+        </p>
+      </div>
+    </div>
+    <div class="flex justify-between gap-4">
+      <div class="flex justify-between gap-2">
+        <button
+        class="px-5 py-2 mt-10 text-base text-[#E2341D] border border-[#E2341D] rounded-[7px] flex justify-center gap-4 items-center"
+        type="submit"
+        tabindex="-1"
+        (click)="dialogRef.close()"
+      >
+        <img src="assets/images/cancel.svg" />
+        <div
+          class="text-[#E2341D] relative before:absolute pl-4 before:top-0 before:left-[-0.4rem] before:h-full before:content-[''] before:border-l-2 before:border-[#E2341D]"
+        >
+          Cancel
+        </div>
+      </button>
+      <button
+      class="px-5 py-2 mt-10 text-base text-[#5F6D7E] border border-[#5F6D7E] rounded-[7px] flex justify-center gap-4 items-center"
+      type="submit"
+      tabindex="-1"
+      (click)="dialogRef.close()"
+    >
+      <img src="assets/images/reset-btn.svg" />
+      <div
+        class="text-[#5F6D7E] relative before:absolute pl-4 before:top-0 before:left-[-0.4rem] before:h-full before:content-[''] before:border-l-2 before:border-[#5F6D7E]"
+      >
+        Reset
+      </div>
+    </button>
+      </div>
+    <div class="flex justify-between gap-2">
+      <button
+      class="px-5 py-2 mt-10 text-base text-[#5F6D7E] border border-[#5F6D7E] rounded-[7px] flex justify-center gap-4 items-center"
+      type="submit"
+      tabindex="-1"
+      (click)="dialogRef.close()"
+    >
+      <img src="assets/images/save-btn.svg" />
+      <div
+        class="text-[#5F6D7E] relative before:absolute pl-4 before:top-0 before:left-[-0.4rem] before:h-full before:content-[''] before:border-l-2 before:border-[#5F6D7E]"
+      >
+        Save & continue
+      </div>
+    </button>
+      <button
+      class="px-5 py-2 mt-10 text-base text-white bg-[#056A3A] rounded-[7px] flex justify-center gap-4 items-center"
+      type="submit"
+      tabindex="-1"
+
+    >
+      <img src="assets/images/save.svg" />
+      <div
+        class="text-white relative before:absolute pl-4 before:top-0 before:left-[-0.4rem] before:h-full before:content-[''] before:border-l-2 before:border-white"
+      >
+        Save
+      </div>
+    </button>
+    </div>
+      <!--  <ga-button
+        class="my-2"
+        type="button"
+        secondary
+        (click)="dialogRef.close()"
+      >
+        Cancel
+      </ga-button>
+      <ga-button class="my-2" type="submit" [loading]="loading">
+        {{ mode }}
+      </ga-button> -->
+    </div>
+  </form>
+</div>

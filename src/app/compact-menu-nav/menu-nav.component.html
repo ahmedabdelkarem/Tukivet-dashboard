@@ -1,0 +1,11 @@
+<ga-menu-nav-sidebar
+  [menuNodes]="menuNodes"
+  [menuOpened]="menuOpened"
+  (closeMenu)="onCloseMenuNav()"
+  [currentPage]="currentPage"
+></ga-menu-nav-sidebar>
+
+<ga-menu-nav-button
+  [menuOpened]="menuOpened"
+  (openMenu)="onOpenMenuNav()"
+></ga-menu-nav-button>

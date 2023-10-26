@@ -1,0 +1,93 @@
+$md-width: 72px;
+$sm-width: 48px;
+$md-margin: 8px;
+$sm-margin: 5.5px;
+
+// default - success - error ..
+@mixin generateStatus(
+  $backgroundColor,
+  $borderColor,
+ 
+  $textColor
+) {
+  background-color: $backgroundColor;
+  border: 0.1em solid $borderColor;
+ 
+  color: $textColor;
+}
+
+@mixin generateSize($width, $height,$margin) {
+  width: $width;
+  height: $height;
+  margin: $margin;
+}
+
+.otp {
+  border-radius: 10px;
+ 
+  text-align: center;
+  border: none;
+  box-sizing: border-box;
+
+  &.otp-default {
+    @include generateStatus(
+      #F5F6F7,
+      none,
+     
+      none
+    );
+  }
+  &.otp-success {
+    @include generateStatus(
+      #056A3A,
+      none,
+     
+      #262C3A
+    );
+  }
+  /* &.otp-error {
+    @include generateStatus(
+      $comp-color-otp-error-bg,
+      none,
+      none,
+      $comp-color-otp-error-text
+    );
+  } */
+
+  &.otp-medium {
+   
+    @include generateSize($md-width, $md-width,$md-margin);
+  }
+  &.otp-small {
+   
+    @include generateSize($sm-width, $sm-width,$sm-margin);
+  }
+}
+
+.otp:focus {
+  outline: 0;
+  &.otp-default {
+    @include generateStatus(
+      #F5F6F7,
+      #F5F6F7,
+     
+      #262C3A
+    );
+  }
+ /*  &.otp-error {
+    @include generateStatus(
+      $comp-color-otp-error-bg,
+      $comp-color-otp-error-border-inner,
+      $comp-color-otp-error-border-outer,
+      $comp-color-otp-error-text
+    );
+  } */
+  &.otp-success {
+    @include generateStatus(
+      #056A3A,
+      #7CC58F,
+    
+      #262C3A
+    );
+  }
+}

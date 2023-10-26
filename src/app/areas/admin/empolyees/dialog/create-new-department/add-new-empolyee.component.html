@@ -1,0 +1,313 @@
+<div class="px-4 py-2">
+  <div class="grid gap-2 sticky top-0 bg-white z-20">
+    <div class="flex justify-between items-center my-3">
+      <div class="flex gap-3">
+        <img src="assets/images/empolyee.svg" />
+        <span class="text-xl font-bold">Add New Empolyee</span>
+      </div>
+
+      <img
+        src="assets/images/close-popup.svg"
+        class="cursor-pointer"
+        (click)="dialogRef.close()"
+      />
+    </div>
+    <hr />
+  </div>
+  <form
+    [formGroup]="form"
+    class="flex flex-col mb-4 p-2 pt-5 "
+    (ngSubmit)="onSubmit()"
+  >
+
+  <div class="flex justify-center my-5 ">
+    <ng-container *ngIf="photoImage; else elseTemplate">
+      <div class=" relative w-24 h-24 flex justify-center items-center rounded-full bg-[#D9D9D9] border border-dotted border-[#5F6D7E]">
+        <img [src]="photoImage" class="w-full h-full rounded-full object-cover" >
+
+        <div class="flex p-2 rounded-full absolute bottom-0 right-0 bg-white border border-[#93B722] cursor-pointer" (click)="addImage()">
+         <img src="assets/images/edit-image.svg" class="w-4 h-4">
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #elseTemplate>
+       <div class=" relative w-24 h-24 flex justify-center items-center rounded-full bg-[#D9D9D9] border border-dotted border-[#5F6D7E]">
+         <img src="assets/images/img-placeholder.svg" class="w-12 h-12" >
+
+         <div class="flex p-2 rounded-full absolute bottom-0 right-0 bg-white border border-[#93B722] cursor-pointer" (click)="addImage()">
+          <img src="assets/images/edit-image.svg" class="w-4 h-4">
+         </div>
+       </div>
+
+    </ng-template>
+  </div>
+    <div class="grid gap-2 grid-cols-2">
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          organization
+        </label>
+        <input
+          formControlName="organization"
+
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline"
+          type="text"
+          placeholder="organization"
+
+        />
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          code
+        </label>
+        <input
+          formControlName="code"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline focus:border-[#056A3A]"
+          type="text"
+          placeholder="code"
+        />
+      </div>
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          Department
+        </label>
+
+        <select id="countries" formControlName="Department" class="bg-gray-50 border border-gray-300 text-[#272D37]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+          <option selected>Choose a country</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="FR">France</option>
+          <option value="DE">Germany</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          Branches
+        </label>
+
+        <select id="countries" formControlName="Branches" class="bg-gray-50 border border-gray-300 text-[#272D37]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a country</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="FR">France</option>
+          <option value="DE">Germany</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          Title In Arabic <span class="required-label">*</span>
+        </label>
+        <input
+          formControlName="nameArabic"
+          required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline focus:border-[#056A3A]"
+          type="text"
+          placeholder="Name Arabic"
+          [ngClass]="{'focus:border-red-500 border-red-500':  form.controls.nameArabic.hasError('required') &&
+          (form.controls.nameArabic.touched || form.controls.nameArabic.dirty)}"
+        />
+
+        <p
+          class="text-red-500 text-xs italic mt-2"
+          *ngIf="
+            form.controls.nameArabic.hasError('required') &&
+            (form.controls.nameArabic.touched || form.controls.nameArabic.dirty)
+          "
+        >
+        Title Arabic is Required
+        </p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          Prefix In Arabic <span class="required-label">*</span>
+        </label>
+        <input
+          formControlName="nameEnglish"
+          required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline focus:border-[#056A3A]"
+          type="text"
+          placeholder="placeholder"
+          [ngClass]="{'focus:border-red-500 border-red-500':     form.controls.nameEnglish.hasError('required') &&
+          (form.controls.nameEnglish.touched ||
+            form.controls.nameEnglish.dirty)}"
+        />
+
+        <p
+          class="text-red-500 text-xs italic mt-2"
+          *ngIf="
+            form.controls.nameEnglish.hasError('required') &&
+            (form.controls.nameEnglish.touched ||
+              form.controls.nameEnglish.dirty)
+          "
+        >
+          Prefix is Required
+        </p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          First name in arabic <span class="required-label">*</span>
+        </label>
+        <input
+          formControlName="addressEnglish"
+          required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline focus:border-[#056A3A]"
+          type="text"
+          placeholder=" First name in arabic"
+          [ngClass]="{'focus:border-red-500 border-red-500':       form.controls.addressEnglish.hasError('required') &&
+          (form.controls.addressEnglish.touched ||
+            form.controls.addressEnglish.dirty)}"
+        />
+
+        <p
+          class="text-red-500 text-xs italic mt-2"
+          *ngIf="
+            form.controls.addressEnglish.hasError('required') &&
+            (form.controls.addressEnglish.touched ||
+              form.controls.addressEnglish.dirty)
+          "
+        >
+        First name is Required
+        </p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+         Last Name in arabic <span class="required-label">*</span>
+        </label>
+        <input
+          formControlName="addressArabic"
+          required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline focus:border-[#056A3A]"
+          type="text"
+          placeholder="Last Name in arabic"
+          [ngClass]="{'focus:border-red-500 border-red-500':       form.controls.addressArabic.hasError('required') &&
+          (form.controls.addressArabic.touched ||
+            form.controls.addressArabic.dirty)}"
+        />
+
+        <p
+          class="text-red-500 text-xs italic mt-2"
+          *ngIf="
+            form.controls.addressArabic.hasError('required') &&
+            (form.controls.addressArabic.touched ||
+              form.controls.addressArabic.dirty)
+          "
+        >
+          Last Name is Required
+        </p>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+          First name in arabic <span class="required-label">*</span>
+        </label>
+        <input
+          formControlName="addressEnglish"
+          required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline focus:border-[#056A3A]"
+          type="text"
+          placeholder=" First name in arabic"
+          [ngClass]="{'focus:border-red-500 border-red-500':       form.controls.addressEnglish.hasError('required') &&
+          (form.controls.addressEnglish.touched ||
+            form.controls.addressEnglish.dirty)}"
+        />
+
+        <p
+          class="text-red-500 text-xs italic mt-2"
+          *ngIf="
+            form.controls.addressEnglish.hasError('required') &&
+            (form.controls.addressEnglish.touched ||
+              form.controls.addressEnglish.dirty)
+          "
+        >
+        First name is Required
+        </p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-[#272D37] text-sm font-bold mb-2">
+         Prefix in English <span class="required-label">*</span>
+        </label>
+        <input
+          formControlName="addressArabic"
+          required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-[#272D37] leading-tight focus:outline-none focus:shadow-outline focus:border-[#056A3A]"
+          type="text"
+          placeholder=" Prefix in English"
+          [ngClass]="{'focus:border-red-500 border-red-500':        form.controls.addressArabic.hasError('required') &&
+          (form.controls.addressArabic.touched ||
+            form.controls.addressArabic.dirty)}"
+        />
+
+        <p
+          class="text-red-500 text-xs italic mt-2"
+          *ngIf="
+            form.controls.addressArabic.hasError('required') &&
+            (form.controls.addressArabic.touched ||
+              form.controls.addressArabic.dirty)
+          "
+        >
+        Title is Required
+        </p>
+      </div>
+    </div>
+
+    <div class="flex justify-between gap-4">
+      <div class="flex justify-between gap-2">
+        <button
+        class="px-5 py-2 mt-10 text-base text-[#E2341D] border border-[#E2341D] rounded-[7px] flex justify-center gap-4 items-center"
+        type="submit"
+        tabindex="-1"
+        (click)="dialogRef.close()"
+      >
+        <img src="assets/images/cancel.svg" />
+        <div
+          class="text-[#E2341D] relative before:absolute pl-4 before:top-0 before:left-[-0.4rem] before:h-full before:content-[''] before:border-l-2 before:border-[#E2341D]"
+        >
+          Cancel
+        </div>
+      </button>
+      <button
+      class="px-5 py-2 mt-10 text-base text-[#5F6D7E] border border-[#5F6D7E] rounded-[7px] flex justify-center gap-4 items-center"
+      type="submit"
+      tabindex="-1"
+      (click)="dialogRef.close()"
+    >
+      <img src="assets/images/reset-btn.svg" />
+      <div
+        class="text-[#5F6D7E] relative before:absolute pl-4 before:top-0 before:left-[-0.4rem] before:h-full before:content-[''] before:border-l-2 before:border-[#5F6D7E]"
+      >
+        Reset
+      </div>
+    </button>
+      </div>
+    <div class="flex justify-between gap-2">
+      <button
+      class="px-5 py-2 mt-10 text-base text-[#5F6D7E] border border-[#5F6D7E] rounded-[7px] flex justify-center gap-4 items-center"
+      type="submit"
+      tabindex="-1"
+      (click)="dialogRef.close()"
+    >
+      <img src="assets/images/save-btn.svg" />
+      <div
+        class="text-[#5F6D7E] relative before:absolute pl-4 before:top-0 before:left-[-0.4rem] before:h-full before:content-[''] before:border-l-2 before:border-[#5F6D7E]"
+      >
+        Save & continue
+      </div>
+    </button>
+      <button
+      class="px-5 py-2 mt-10 text-base text-white bg-[#056A3A] rounded-[7px] flex justify-center gap-4 items-center"
+      type="submit"
+      tabindex="-1"
+
+    >
+      <img src="assets/images/save.svg" />
+      <div
+        class="text-white relative before:absolute pl-4 before:top-0 before:left-[-0.4rem] before:h-full before:content-[''] before:border-l-2 before:border-white"
+      >
+        Save
+      </div>
+    </button>
+    </div>
+
+    </div>
+  </form>
+</div>

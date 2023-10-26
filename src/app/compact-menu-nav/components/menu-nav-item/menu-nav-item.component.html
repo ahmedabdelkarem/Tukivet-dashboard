@@ -1,0 +1,47 @@
+<mat-list-item
+  (mouseenter)="onMenuNodeHover(true)"
+  (mouseleave)="onMenuNodeHover(false)"
+>
+  <div
+    (click)="onToggleClick(node)"
+    class="flex items-center justify-between w-full px-6 h-14"
+    [ngClass]="{
+      'bg-[#93B7221A]': (node.isActive && !node.children.length) || itemHovered,
+      ' before:h-full before:border-l-2 before:border-[#056A3A] before:absolute before:left-0 before:opacity-100 before:bg-[#7CC58F4D]':(node.isActive && !node.children.length) || itemHovered
+    }"
+  >
+    <div class="flex items-center w-4/5">
+      <button class="!w-8 !h-8" >
+        <mat-icon
+          [svgIcon]="node.isActive ? node.icon + '-active' : node.icon"
+          class="rounded-sm align-middle"
+        >
+        </mat-icon>
+      </button>
+      <span
+        class="ltr:ml-4 rtl:mr-4"
+        [ngClass]="{ 'text-[#056A3A] font-medium': node.isActive }"
+        >{{ node.name}}</span
+      >
+    </div>
+    <div class="flex items-center">
+      <button mat-icon-button *ngIf="node.children.length > 0">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{ node.expanded ? 'expand_less' : 'expand_more' }}
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-list-item>
+<div *ngIf="node.expanded" class="w-full px-6">
+  <div
+    *ngFor="let child of node.children"
+    [ngClass]="child.isActive ? 'bg-ga-blue-75 text-blue-500 font-medium' : ''"
+  >
+    <span
+      (click)="onMenuNodeClick(child)"
+      class="ltr:pl-16 rtl:pr-16 h-10 inline-flex items-center"
+      >{{ child.name }}</span
+    >
+  </div>
+</div>

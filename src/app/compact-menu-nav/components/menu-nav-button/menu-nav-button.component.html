@@ -1,0 +1,17 @@
+<div
+  class="flex justify-center"
+  [ngClass]="menuOpened ? 'justify-center' : '!items-end !float-right'"
+>
+  <button
+    (click)="onOpenMenuNav()"
+    [ngClass]="{ 'right-6': !menuOpened }"
+    class="relative !h-11 !w-11 z-30 bottom-7 !rounded-full !bg-[#93B7221A] text-[#056A3A]"
+    
+  >
+    <mat-icon
+      [svgIcon]="menuOpened ? 'menu-remove' : 'dashboard-menu'"
+      class="align-middle"
+    >
+    </mat-icon>
+  </button>
+</div>

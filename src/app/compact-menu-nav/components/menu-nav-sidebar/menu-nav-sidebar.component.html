@@ -1,0 +1,27 @@
+<mat-sidenav-container>
+  <mat-sidenav
+    mode="over"
+    [opened]="menuOpened"
+    class="w-screen pt-4"
+    fixedTopGap="76"
+    fixedInViewport
+  >
+    <mat-nav-list *ngFor="let node of menuNodes">
+      <ga-menu-nav-item
+        [node]="node"
+        [menuOpened]="menuOpened"
+        (closeMenu)="onCloseMenuNav()"
+      ></ga-menu-nav-item>
+    </mat-nav-list>
+    <div
+    class="flex flex-col justify-center my-8 border-t border-solid bg-ga-page-bg ltr:ml-8 rtl:mr-8"
+  ></div>
+  <mat-nav-list *ngFor="let node of fixedMenuNodes">
+    <ga-menu-nav-item
+      [node]="node"
+      [menuOpened]="menuOpened"
+      (closeMenu)="onCloseMenuNav()"
+    ></ga-menu-nav-item>
+  </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>

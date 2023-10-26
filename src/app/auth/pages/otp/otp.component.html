@@ -1,0 +1,49 @@
+
+  <div class="flex justify-center items-center">
+    <div class="flex flex-col items-center justify-between min-h-full bg-white w-[500px] rounded-[20px] border border-gray-500 border-opacity-50 backdrop-blur-[30px] p-9">
+    
+      <form [formGroup]="otpForm" class="flex flex-col w-full">
+         <div class="flex justify-center mb-10">
+          <img src="assets/images/icon-logo.svg" alt="">
+         </div>
+         <div class="text-center text-gray-800 text-base font-normal leading-normal mb-5">
+          Lorem ipsum dolor sit amet consectetur. Ultricies ipsum lorem at enim convallis. Cursus quam aliquam ut proin amet. Arcu eget auctor amet nisi. Suspendisse risus.
+        </div>
+        <otp [count]="4" [status]="OTPStatus.DEFAULT" [size]="OTPSize.MEDIUM"></otp>
+        
+      <button
+          class="w-full py-2 mt-10 text-base text-white bg-[#056A3A] rounded-[7px] flex justify-center items-center "
+          type="submit"
+          [disabled]="submitted"
+          (click)="onSubmit()"
+          tabindex="-1"
+        >
+          {{ loading ? "" : 'Verify' }}
+          <div *ngIf="loading">
+            
+          </div>
+        </button> 
+      </form>
+     <!--  <div class="mb-8">
+        <p class="w-full text-base text-center mb-4">
+          {{ "Auth.new-cartimatic" | translate }}
+          <a
+            class="text-purple-600 dark:text-purple-300"
+            (click)="goToRegister()"
+            >{{ "Auth.create-account" | translate }}</a
+          >
+        </p>
+  
+        <p class="text-base text-center">
+          {{ "Auth.Having-trouble-logging-in" | translate }}
+          <a
+            class="text-purple-600 dark:text-purple-300"
+            routerLink="/auth/forget-password"
+            >{{ "Auth.Reset-your-password" | translate }}</a
+          >
+        </p>
+      </div> -->
+    </div>
+  </div>
+  
+

@@ -1,0 +1,96 @@
+<mat-sidenav-container autosize>
+  <mat-sidenav
+    [ngClass]="{ 'w-18': !menuOpened }"
+    mode="side"
+    [opened]="true"
+    position="start"
+    class="pt-4 ga-menu-nav-sidebar !border-none"
+    fixedInViewport
+  >
+    <div class="flex flex-col relative h-full">
+      <div
+        class="pb-12"
+        [ngClass]="
+          menuOpened
+            ? 'w-72 ltr:pl-2 rtl:pr-2 flex justify-around items-center'
+            : 'w-18 ltr:pl-6 rtl:pr-6 flex justify-center'
+        "
+      >
+        <mat-icon
+          [svgIcon]="
+            menuOpened ? 'desktop-menu-expand' : 'desktop-menu-collapse'
+          "
+          [ngClass]="menuOpened ? '!w-36' : '!w-16 !h-11'"
+          class="flex items-center align-middle"
+        ></mat-icon>
+        <div class="cursor-pointer">
+          <mat-icon
+            [svgIcon]="'arrow-collapse'"
+            *ngIf="menuOpened"
+            (click)="onOpenMenuNav()"
+            class="z-30 !w-7 !h-3 rotate-180"
+          >
+          </mat-icon>
+        </div>
+      </div>
+      <mat-nav-list
+        class="flex-1"
+        (mouseenter)="onMenuNodeHover(true)"
+        (mouseleave)="onMenuNodeHover(false)"
+      >
+        <cdk-virtual-scroll-viewport
+          [ngClass]="{ 'no-scrollbar': !itemHovered }"
+          *ngIf="menuOpened; else menuCollapsed"
+          #scroller
+          itemSize="5"
+          class="h-full"
+        >
+          <ga-extended-menu-nav-item
+            *ngFor="let node of menuNodes"
+            [node]="node"
+            [menuOpened]="menuOpened"
+            (closeMenu)="onCloseMenuNav()"
+          >
+          </ga-extended-menu-nav-item>
+          <div
+            class="flex flex-col justify-center my-8 border-t border-solid bg-ga-page-bg ltr:ml-8 rtl:mr-8"
+          ></div>
+          <ga-extended-menu-nav-item
+            *ngFor="let node of fixedMenuNodes"
+            [node]="node"
+            [menuOpened]="menuOpened"
+            (closeMenu)="onCloseMenuNav()"
+          >
+          </ga-extended-menu-nav-item>
+        </cdk-virtual-scroll-viewport>
+        <ng-template #menuCollapsed>
+          <ga-extended-menu-nav-item
+            *ngFor="let node of menuNodes"
+            [node]="node"
+            [menuOpened]="menuOpened"
+            (closeMenu)="onCloseMenuNav()"
+          >
+          </ga-extended-menu-nav-item>
+
+          <div
+            class="flex flex-col justify-center my-8 border-t border-solid bg-ga-page-bg ltr:ml-8 rtl:mr-8"
+          ></div>
+          <ga-extended-menu-nav-item
+            *ngFor="let node of fixedMenuNodes"
+            [node]="node"
+            [menuOpened]="menuOpened"
+            (closeMenu)="onCloseMenuNav()"
+          >
+          </ga-extended-menu-nav-item>
+        </ng-template>
+      </mat-nav-list>
+
+      <ga-extended-menu-nav-button
+        *ngIf="!menuOpened"
+        [menuOpened]="menuOpened"
+        (openMenu)="onOpenMenuNav()"
+      >
+      </ga-extended-menu-nav-button>
+    </div>
+  </mat-sidenav>
+</mat-sidenav-container>

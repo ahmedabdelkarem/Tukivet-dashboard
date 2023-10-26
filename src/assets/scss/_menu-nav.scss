@@ -1,0 +1,16 @@
+.menu-node {
+  @apply relative inline-block;
+}
+
+.menu-node-content {
+  @apply absolute hidden min-w-[10rem] z-50 rounded-lg border py-2;
+}
+
+.menu-node-content span {
+  @apply block;
+}
+
+.menu-node:hover .menu-node-content {
+  display: block;
+}
+

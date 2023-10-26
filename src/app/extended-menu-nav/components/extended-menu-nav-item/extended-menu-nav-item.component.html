@@ -1,0 +1,67 @@
+<mat-list-item
+  class="menu-node before:content-['']"
+  (click)="onMenuNodeClick(node)"
+  (mouseenter)="onMenuNodeHover(true)"
+  (mouseleave)="onMenuNodeHover(false)"
+  [ngClass]="{
+    'bg-[#93B7221A]': (node.isActive && !node.children.length) || itemHovered,
+    ' before:h-full before:border-l-2 before:border-[#056A3A] before:absolute before:left-0 before:opacity-100 before:bg-[#7CC58F4D]':(node.isActive && !node.children.length) || itemHovered
+  }"
+>
+  <div class="w-full">
+    <div (click)="onToggleClick(node)" class="flex justify-between w-full h-12">
+      <div class="flex items-center w-4/5 ltr:pl-2 rtl:pr-2">
+        <button class="!w-8 !h-8" >
+          <mat-icon
+            [svgIcon]="node.isActive ? node.icon + '-active' : node.icon"
+            class="rounded-sm align-middle"
+          >
+          </mat-icon>
+        </button>
+        <span
+          *ngIf="menuOpened"
+          class="ltr:ml-4 rtl:mr-4 text-base"
+          [ngClass]="{ 'text-[#056A3A]': node.isActive }"
+          >{{ node.name }}</span
+        >
+      </div>
+      <div *ngIf="menuOpened" class="flex items-center">
+        <button  *ngIf="node.children.length > 0">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{ node.expanded ? 'expand_less' : 'expand_more' }}
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+    <div
+      *ngIf="!menuOpened && node.children.length && !submenuClicked"
+      class="menu-node-content fixed bg-white shadow-ga w-52 -mt-12 ltr:ml-16 rtl:mr-16 rtl:z-50"
+    >
+      <span
+        *ngFor="let child of node.children"
+        (click)="onSubmmenuNodeClick(child, $event)"
+        class="hover:bg-ga-gray-300 hover:cursor-pointer ltr:pl-4 rtl:pr-4 text-base ga-light-steel-blue py-3"
+        [ngClass]="child.isActive ? '!bg-ga-blue-75 !text-blue-500' : ''"
+        >{{ child.name  }}</span
+      >
+    </div>
+  </div>
+</mat-list-item>
+<div *ngIf="node.expanded && menuOpened" class="w-full">
+  <div
+    (click)="onSubmmenuNodeClick(child, $event)"
+    class="ltr:pl-10 rtl:pr-10 hover:bg-ga-gray-300 hover:cursor-pointer"
+    *ngFor="let child of node.children"
+    [ngClass]="{
+      'bg-ga-blue-75 text-blue-500': child.isActive
+    }"
+  >
+    <span
+      [ngClass]="
+        child.isActive ? 'border-ga-blue-500' : 'border-ga-light-steel-blue'
+      "
+      class="ltr:border-l rtl:border-r border-solid ltr:pl-8 rtl:pr-8 h-10 inline-flex items-center ga-light-steel-blue text-base"
+      >{{ child.name }}</span
+    >
+  </div>
+</div>

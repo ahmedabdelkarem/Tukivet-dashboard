@@ -1,0 +1,481 @@
+<div class="content-header mb-5">
+  <div class="custom-header">
+    <div class="content-header-title">
+      <img src="assets/images/empolyee.svg" alt="img" />
+      <h4>Empolyees</h4>
+    </div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">pepsi Co</a> /</li>
+        <li class="breadcrumb-item active" aria-current="page">Empolyees</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="content-header-toolbar">
+    <button class="btn btn-secondary">
+      <img src="assets/images/import.svg" alt="img" />
+      <h4>Import</h4>
+    </button>
+    <button
+      class="btn btn-secondary menu-btn"
+      [matMenuTriggerFor]="menu"
+      mat-icon-button
+      aria-label="Example icon-button with a menu"
+    >
+      <img src="assets/images/export.svg" alt="img" />
+      <h4 class="export">
+        Export All
+        <img src="assets/images/download.svg" alt="img" />
+      </h4>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span>Export To Xls</span>
+      </button>
+      <button mat-menu-item>
+        <span>Export To PDF</span>
+      </button>
+      <button mat-menu-item>
+        <span>Export To Doc</span>
+      </button>
+    </mat-menu>
+    <button class="btn btn-brand" (click)="addNewEmpolyee()">
+      <h4>+ Add New</h4>
+    </button>
+  </div>
+</div>
+
+<div class="flex content-body gap-2 px-4 py-7 sm:max-xl:flex-wrap section-margin-bottom">
+  <div class="w-[85%] flex gap-2 sm:max-xl:w-full">
+    <div class="w-[90%]">
+      <div class="w-full flex gap-2">
+        <label
+          class="relative text-gray-400 focus-within:text-gray-600 block w-[35%]"
+        >
+          <img
+            src="assets/images/search.svg"
+            alt="img"
+            class="pointer-events-none absolute top-1/2 transform -translate-y-1/2 left-3"
+          />
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search by name, ID, hotline or email"
+            class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none"
+          />
+        </label>
+
+        <select
+          id="countries"
+          class="w-[25%] bg-white custom-dropdown border custom-border-gray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option selected>Branch</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="FR">France</option>
+          <option value="DE">Germany</option>
+        </select>
+
+        <select
+          id="countries"
+          class="w-[25%] bg-white custom-dropdown border custom-border-gray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option selected>Department</option>
+          <option value="US">All</option>
+          <option value="CA">Canada</option>
+          <option value="FR">France</option>
+          <option value="DE">Germany</option>
+        </select>
+        <div class="w-[130px] h-[42px] border border-[#91939666] rounded-[7px] p-3 justify-start items-center gap-4 inline-flex cursor-pointer justify-content-between"
+        [matMenuTriggerFor]="menuSort"
+        >
+          <div class="text-[#91939666] text-opacity-40 text-[13px] font-medium leading-[18px]">Status </div>
+          <img src="assets/images/arrow-sort.svg">
+
+        </div>
+        <mat-menu #menuSort="matMenu">
+          <button mat-menu-item>
+            <span>All</span>
+          </button>
+          <button mat-menu-item>
+            <span>Active</span>
+          </button>
+          <button mat-menu-item>
+            <span>Suspended</span>
+          </button>
+
+        </mat-menu>
+      </div>
+      <div class="w-full flex gap-2 mt-3 sm:max-xl:flex-wrap" *ngIf="moreFilter">
+        <label
+          class=" relative custom-label text-gray-400 focus-within:text-gray-600 block"
+        >
+          <!-- <img src="assets/images/calendar.svg" alt="img"
+          class="pointer-events-none absolute top-1/2 transform -translate-y-1/2 left-3" /> -->
+          <input placeholder="from" matInput [matDatepicker]="picker1" />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </label>
+
+        <label
+          class=" relative custom-label text-gray-400 focus-within:text-gray-600 block"
+        >
+          <!-- <img src="assets/images/calendar.svg" alt="img"
+          class="pointer-events-none absolute top-1/2 transform -translate-y-1/2 left-3" /> -->
+          <input placeholder="to" matInput [matDatepicker]="picker2" />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </label>
+        <label
+          class=" relative custom-label text-gray-400 focus-within:text-gray-600 block"
+        >
+          <!-- <img src="assets/images/calendar.svg" alt="img"
+        class="pointer-events-none absolute top-1/2 transform -translate-y-1/2 left-3" /> -->
+          <input placeholder="from" matInput [matDatepicker]="picker3" />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker3"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </label>
+
+        <label
+          class=" relative custom-label text-gray-400 focus-within:text-gray-600 block"
+        >
+          <!-- <img src="assets/images/calendar.svg" alt="img"
+        class="pointer-events-none absolute top-1/2 transform -translate-y-1/2 left-3" /> -->
+          <input placeholder="to" matInput [matDatepicker]="picker4" />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker4"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker4></mat-datepicker>
+        </label>
+      </div>
+    </div>
+
+    <div class="w-[10%] flex justify-center gap-2 items-center cursor-pointer h-12" (click)="moreFilter = !moreFilter">
+      <div class="text-[#056A3A] text-[12px] font-medium leading-[18px]">
+        More Filters
+      </div>
+      <img class="w-3 h-3 transition-all" [ngClass]="{'rotate-180': moreFilter}" src="assets/images/arrow-filter.svg" />
+    </div>
+  </div>
+
+  <div class="w-[15%] flex justify-between gap-2 h-12 sm:max-xl:w-[50%] sm:max-xl:justify-start">
+    <button class="btn btn-secondary justify-center w-[66%] p-0 gap-4">
+      <img src="assets/images/search.svg" alt="img" />
+      <h4 class="pl-3">Search</h4>
+    </button>
+    <div>
+      <img src="assets/images/reset.svg" alt="img" />
+    </div>
+  </div>
+</div>
+
+<div class="content-body section-margin-bottom">
+  <div class="action-tab">
+    <div class="actions">
+     <!--  <select
+        id="countries"
+        class="bg-gray-50 custom-border-gray sort-custom border custom-border-gray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      >
+        <option selected>sort</option>
+        <option value="US">United States</option>
+        <option value="CA">Canada</option>
+        <option value="FR">France</option>
+        <option value="DE">Germany</option>
+      </select> -->
+      <div class="w-[98.98px] h-[42px] border border-[#91939666] rounded-[7px] p-3 justify-start items-center gap-4 inline-flex cursor-pointer"
+      [matMenuTriggerFor]="menuSort"
+      >
+        <img src="assets/images/sort-icons.svg">
+        <div class="text-[#91939666] text-opacity-40 text-[13px] font-medium leading-[18px]">Sort </div>
+        <img src="assets/images/arrow-sort.svg">
+      </div>
+
+      <mat-menu #menuSort="matMenu">
+        <button mat-menu-item>
+          <span>Name A to Z</span>
+        </button>
+        <button mat-menu-item>
+          <span>Name Z to A</span>
+        </button>
+        <button mat-menu-item>
+          <span>Newest First</span>
+        </button>
+        <button mat-menu-item>
+          <span>Oldest First</span>
+        </button>
+        <hr>
+        <button mat-menu-item>
+          <span>Code Ascending</span>
+        </button>
+        <button mat-menu-item>
+          <span>Code Descending</span>
+        </button>
+        <hr>
+        <button mat-menu-item>
+          <span>Number Of Empolyees ASC</span>
+        </button>
+        <button mat-menu-item>
+          <span>Number Of Empolyees Desc</span>
+        </button>
+        <hr>
+        <button mat-menu-item>
+          <span>Active First</span>
+        </button>
+        <button mat-menu-item>
+          <span>Suspended First</span>
+        </button>
+      </mat-menu>
+      <div class="actions-btns">
+        <button class="btn btn-secondary btn-success">
+          <div
+            class="my-icon icon-trash"
+            aria-label="My icon"
+            [inlineSVG]="'assets/images/bookmark.svg'"
+          ></div>
+        </button>
+        <button class="btn btn-secondary btn-success">
+          <div
+            class="my-icon icon-trash"
+            aria-label="My icon"
+            [inlineSVG]="'assets/images/close.svg'"
+          ></div>
+        </button>
+        <button class="btn btn-secondary btn-success">
+          <div
+            class="my-icon icon-trash"
+            aria-label="My icon"
+            [inlineSVG]="'assets/images/document.svg'"
+          ></div>
+        </button>
+        <button class="btn btn-secondary btn-success">
+          <div
+            class="my-icon"
+            aria-label="My icon"
+            [inlineSVG]="'assets/images/export.svg'"
+          ></div>
+        </button>
+        <button class="btn btn-secondary btn-success btn-trash">
+          <div
+            class="my-icon icon-trash"
+            aria-label="My icon"
+            [inlineSVG]="'assets/images/trash.svg'"
+          ></div>
+        </button>
+      </div>
+    </div>
+    <h4 class="gray-text">
+      Displaying <span class="dark-text">1</span> to
+      <span class="dark-text">7</span> from
+      <span class="lemon-text">3210</span> Organization
+    </h4>
+  </div>
+  <div class="overflow-y-auto">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th
+          mat-header-cell
+          class="w-[5.1%] text-sm font-bold text-left leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef
+        >
+          <mat-checkbox
+            (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [aria-label]="checkboxLabel()"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell class="text-left" *matCellDef="let row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+            [aria-label]="checkboxLabel(row)"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="Name">
+        <th
+          mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-left leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef
+        >
+          Name
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          <div class="flex items-center my-2">
+            <div class="mx-2">
+              <div class="font-medium text-base text-[#272D37] mb-1">Alex</div>
+              <div class="text-sm text-left text-[#5F6D7E] mb-1">
+                {{ element.Name }}
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Department">
+        <th
+          mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef
+        >
+          Branch Address
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          {{ element.Department }}
+        </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="Title">
+        <th
+          mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef
+        >
+          Phone Numbers
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          {{ element.Title }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Phone">
+        <th
+          mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef
+        >
+          No Of Employees
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          {{ element.Phone }}
+        </td>
+      </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="Status">
+        <th
+          mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef
+        >
+          Status
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          {{ element.Status }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="reminder">
+        <th
+          mat-header-cell
+          class="w-[5.1%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef
+        ></th>
+        <td
+          mat-cell
+          class="text-center"
+          class="cursor-pointer"
+          *matCellDef="let element"
+        >
+          <mat-icon
+            [svgIcon]="'reminder'"
+            class="rounded-sm align-middle"
+            matTooltip="Creation date 1/11/2023"
+          >
+          </mat-icon>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="sub-menu">
+        <th
+          mat-header-cell
+          class="w-[5.1%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef
+        ></th>
+        <td
+          mat-cell
+          class="text-center"
+          class="cursor-pointer"
+          *matCellDef="let element"
+        >
+          <mat-icon
+            [svgIcon]="'sub-menu'"
+            [matMenuTriggerFor]="dropdown"
+            mat-icon-button
+            class="rounded-sm align-middle"
+          >
+          </mat-icon>
+          <mat-menu #dropdown="matMenu">
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/document.svg">
+              <span>View Branches</span>
+            </button>
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/departmentMenu.svg">
+              <span>View Departments</span>
+            </button>
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/empolyeeMeny.svg">
+              <span>View Empolyees</span>
+            </button>
+            <hr>
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/word.svg">
+              <span>Export To Word</span>
+            </button>
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/pdf.svg">
+              <span>Export To PDF</span>
+            </button>
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/xls.svg">
+              <span>Export To Xls</span>
+            </button>
+            <hr>
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/EditIcon.svg">
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/suspendIcon.svg">
+              <span>Suspend</span>
+            </button>
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/delete.svg">
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator
+      data-testid="matPaginator"
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizes"
+      (page)="pageChange($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>

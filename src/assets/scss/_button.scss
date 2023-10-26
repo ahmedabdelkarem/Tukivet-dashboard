@@ -1,0 +1,43 @@
+.mat-button-base,
+.mat-menu-item,
+.mat-menu-trigger,
+.mat-button-toggle,
+.mat-button-toggle-button,
+.mat-sort-header-button {
+  @apply outline-none #{!important};
+}
+
+.mat-icon-button {
+  &:hover {
+    @apply bg-[#93B7221A] #{!important};
+  }
+
+  .mat-button-wrapper,
+  .mat-icon {
+    @apply flex w-full items-center justify-center #{!important};
+  }
+
+  svg {
+    @apply h-full #{!important};
+  }
+}
+
+
+
+
+
+.ga-icon-button {
+  @apply transition-all text-white duration-200 ease-in w-12 h-12 #{!important};
+  &:hover {
+    @apply bg-[#93B7221A]  #{!important};
+  }
+
+
+  mat-icon {
+    @apply text-2xl leading-normal #{!important};
+  }
+}
+
+
+
+
