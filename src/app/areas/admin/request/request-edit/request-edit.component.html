@@ -289,7 +289,14 @@
        </div>
        <hr>
        <div class="d-flex justify-content-between mt-5" *ngFor="let workingHour  of item?.workingHours">
-        <h5>{{workingHour?.day}}</h5>
+        <h5  *ngIf="workingHour.day == WeekDays.Monday">Monaday</h5>
+        <h5  *ngIf="workingHour.day == WeekDays.Tuesday">Tuesday</h5>
+        <h5  *ngIf="workingHour.day == WeekDays.Wednesday">Wednesday</h5>
+        <h5  *ngIf="workingHour.day == WeekDays.Thursdays">Thursdays</h5>
+        <h5  *ngIf="workingHour.day == WeekDays.Friday">Friday</h5>
+        <h5  *ngIf="workingHour.day == WeekDays.Saturday">Saturday</h5>
+        <h5  *ngIf="workingHour.day == WeekDays.Sunday">Sunday</h5>
+
         <div class="d-flex align-items-center" *ngFor="let time of workingHour .startingAndEndingTime">
           <div class="date-box">
             {{ time.startingTime  | timeFormat }}

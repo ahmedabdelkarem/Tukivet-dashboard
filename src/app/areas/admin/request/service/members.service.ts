@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { paramsRequest } from '../models/params';
+import { WeekDays } from 'src/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -80,4 +81,6 @@ export class MembersService {
       return this.http.post(url, payload);
 
   }
+
 }
+

@@ -1,3 +1,4 @@
+import { WeekDays } from './../../../../../enums';
 import { Component } from '@angular/core';
 import { MembersService } from '../service/members.service';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +19,7 @@ export class RequestEditComponent {
   userProviderPrimaryInformation: any;
   userProviderSpecialty: any;
   userWorkingDetailsAndHours: any;
-
+  WeekDays = WeekDays
   constructor(private membersService: MembersService,private activatedRoute: ActivatedRoute,private toastr: ToastrService) {}
 
   ngOnInit(): void {
@@ -154,4 +155,11 @@ export class RequestEditComponent {
         }
       );
   }
+
+
+}
+
+export class ExampleComponent {
+  days = Object.values(WeekDays.Monday);
+
 }
