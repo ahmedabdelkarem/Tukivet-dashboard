@@ -19,11 +19,13 @@ import {MatIconModule} from '@angular/material/icon';
 import { RequestEditComponent } from './request-edit/request-edit.component';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {NgStepperModule} from 'angular-ng-stepper';
+import { TimeFormatPipe } from 'src/pipes/time-format.pipe';
 
 @NgModule({
   declarations: [
     RequestComponent,
-    RequestEditComponent
+    RequestEditComponent,
+    TimeFormatPipe
   ],
   imports: [
     NgStepperModule,
@@ -43,7 +45,8 @@ import {NgStepperModule} from 'angular-ng-stepper';
        MatNativeDateModule,
        FormsModule,
        HttpClientModule,
-        InlineSVGModule.forRoot()
+        InlineSVGModule.forRoot(),
+
   ],
   providers: [],
 })

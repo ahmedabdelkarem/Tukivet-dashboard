@@ -2,6 +2,7 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
+@import 'ngx-toastr/toastr';
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -685,4 +686,73 @@ direction: ltr;
 
 // Color menu colors
 .blue { color:blue !important}
+
+.img-view {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.custom-input {
+  height: 60px;
+    border-radius: 12px;
+    border: 0 !important;
+    background: var(--greys-400, #C6C6C6) !important;
+    line-height: 1.25 !important;
+    color: var(--greys-1500, #151515);
+    text-align: right;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.custom-textArea {
+  border-radius: 12px;
+  border: 0 !important;
+  background: var(--greys-400, #C6C6C6) !important;
+  line-height: 1.25 !important;
+  color: var(--greys-1500, #151515);
+  min-height: 100px;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.custom-EID {
+  border-radius: 12px;
+  border: 1px solid var(--greys-200, #ECECEC);
+  background-color: #EBEEF3;
+  max-width: 400px;
+  min-height: 330px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    max-width: 300px;
+    margin: auto;
+    padding: 1rem;
+  }
+}
+.custom-input .specialist {
+  color: var(--primary-hover, #3A1BD0);
+font-size: 12px;
+border-radius: 32px;
+border: 1px solid var(--primary-border, #BCB1F5);
+background: var(--primary-surface, #F7F5FF);
+gap: 12px;
+padding: 2px 12px;
+display: inline-block;
+margin: 0 3px;
+}
+
 

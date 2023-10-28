@@ -384,7 +384,7 @@
           تاريخ التقديم
         </th>
         <td mat-cell class="text-center" *matCellDef="let element">
-          {{ element.registrationDate ?? "-" }}
+          {{ element.registrationDate | date:'M-d-yyyy'  }}
         </td>
       </ng-container>
 
@@ -423,7 +423,7 @@
           >
           </mat-icon>
           <mat-menu #dropdown="matMenu">
-            <button mat-menu-item class="matMenu-dropdown" routerLink="edit">
+            <button mat-menu-item class="matMenu-dropdown" [routerLink]="['edit',element.id ]">
               <img src="assets/images/EditIcon.svg" />
               <span>Edit</span>
             </button>

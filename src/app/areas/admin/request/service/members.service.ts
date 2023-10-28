@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { paramsRequest } from '../models/params';
@@ -7,6 +7,7 @@ import { paramsRequest } from '../models/params';
   providedIn: 'root',
 })
 export class MembersService {
+
   baseURL = 'https://tukivet.azurewebsites.net/api';
   constructor(private http: HttpClient) {}
 
@@ -52,5 +53,31 @@ export class MembersService {
     let url = `${this.baseURL}/Dashboard/GetAllFilters`;
 
     return this.http.get(url);
+  }
+  getServiceProviderPrimaryInformation(id: any): Observable<any> {
+    let url = `${this.baseURL}/Dashboard/GetServiceProviderPrimaryInformation/?ServiceProviderId=${id}`;
+
+    return this.http.get(url);
+  }
+  getServiceProviderWorkingAndScientificExperience(id: any): Observable<any> {
+    let url = `${this.baseURL}/Dashboard/GetServiceProviderWorkingAndScientificExperience/?ServiceProviderId=${id}`;
+
+    return this.http.get(url);
+  }
+  getServiceProviderSpecialty(id: any): Observable<any> {
+    let url = `${this.baseURL}/Dashboard/GetServiceProviderSpecialty/?ServiceProviderId=${id}`;
+
+    return this.http.get(url);
+  }
+  getServiceProviderWorkingDetailsAndHours(id: any): Observable<any> {
+    let url = `${this.baseURL}/Dashboard/GetServiceProviderWorkingDetailsAndHours/?ServiceProviderId=${id}`;
+
+    return this.http.get(url);
+  }
+
+  updateActivationStatus(payload: any) {
+    let url = `${this.baseURL}/Dashboard/UpdateActivationStatus`;
+      return this.http.post(url, payload);
+
   }
 }

@@ -17,7 +17,9 @@
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
 
       <div class="flex flex-column w-full mt-4">
-        <label for="dropzone-file"
+        <img class="img-view" [src]="userPrimaryInformation?.image" alt="img">
+
+        <!-- <label for="dropzone-file"
           class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
           <div class="flex flex-col items-center justify-center pt-5 pb-6">
             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -29,17 +31,17 @@
                 للاخصائي</span></p>
             <p class="text-xs text-gray-500 dark:text-gray-400">٢٠٠ سم * ٤٠٠ سم</p>
           </div>
-          <input id="dropzone-file" type="file" class="hidden" />
-        </label>
+          <img [src]="userPrimaryInformation?.image" alt="img">
+        </label> -->
         <div class="row mt-4">
           <div class="col-md-6">
             <div class="mb-4">
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 الاسم
               </label>
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-[#000] leading-tight focus:outline-none focus:shadow-outline"
-                type="text" placeholder="Ahmed Ramzy" />
+              <div class="custom-input">
+                {{userPrimaryInformation?.name_ar}}
+              </div>
             </div>
 
           </div>
@@ -48,9 +50,9 @@
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 اللقب
               </label>
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-[#000] leading-tight focus:outline-none focus:shadow-outline"
-                type="text" placeholder="استشاري" />
+                <div class="custom-input">
+                  {{userPrimaryInformation?.name_en}}
+                </div>
             </div>
           </div>
           <div class="col-md-6">
@@ -58,19 +60,19 @@
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 رقم الجوال
               </label>
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-[#000] leading-tight focus:outline-none focus:shadow-outline"
-                type="text" placeholder="01116677890" />
+              <div class="custom-input">
+                {{userPrimaryInformation?.phoneNumber}}
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="mb-4">
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
-                رقم الجوال
+                تاريخ الميلاد
               </label>
-              <input
-                class="shadow appearance-none border rounded w-full ps-4 text-[#000] leading-tight focus:outline-none focus:shadow-outline"
-                type="date" placeholder="01116677890" />
+              <div class="custom-input">
+                {{userPrimaryInformation?.birthDate | date: 'M-d-yyyy'}}
+              </div>
             </div>
           </div>
           <div class="col-md-6">
@@ -78,14 +80,10 @@
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 الجنسية
               </label>
-              <select id="countries"
-                class="shadow bg-gray-50 border border-gray-300 text-[#272D37]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
-                <option selected>سعودي</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
-              </select>
+              <div class="custom-input">
+                {{userPrimaryInformation?.nationality}}
+              </div>
+
             </div>
           </div>
           <div class="col-md-6">
@@ -93,9 +91,9 @@
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 عنوان السكن
               </label>
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-[#000] leading-tight focus:outline-none focus:shadow-outline"
-                type="text" placeholder="سعودي" />
+              <div class="custom-input">
+                {{userPrimaryInformation?.address}}
+              </div>
             </div>
           </div>
           <div class="col-md-12">
@@ -103,8 +101,9 @@
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 الوصف
               </label>
-              <textarea class="form-control" rows="5"
-                placeholder="هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على"></textarea>
+              <div class="custom-textArea">
+                {{userPrimaryInformation?.address}}
+              </div>
             </div>
           </div>
           <hr>
@@ -118,9 +117,9 @@
                 <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                   رقم الهوية / الجواز / الاقامة
                 </label>
-                <input
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-[#000] leading-tight focus:outline-none focus:shadow-outline"
-                  type="text" placeholder="1567189925431" />
+                <div class="custom-input">
+                  {{userPrimaryInformation?.nationalID}}
+                </div>
               </div>
             </div>
 
@@ -131,8 +130,10 @@
                 <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                   صورة الهوية / الجواز / الاقامة
                 </label>
-                <img src="assets/images/Field.svg" alt="" />
+                <div class="custom-EID">
+                  <img [src]="userPrimaryInformation?.nationalIdPhoto">
 
+                </div>
               </div>
             </div>
           </div>
@@ -141,12 +142,12 @@
       </div>
       <div class="footer-tab mt-3">
         <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
-          type="submit" tabindex="-1">
+          type="submit" tabindex="-1" (click)="rejectRequest()">
           <div>
             رفض الطلب
           </div>
         </button>
-        <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next"
+        <!-- <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next"
         id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
         role="tab" aria-controls="nav-profile" aria-selected="false" >
 
@@ -155,7 +156,7 @@
           </div>
           <img src="assets/images/right-arrow.svg" alt="" />
 
-        </button>
+        </button> -->
 
       </div>
     </div>
@@ -167,9 +168,9 @@
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 سنوات الخبرة
               </label>
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-[#000] leading-tight focus:outline-none focus:shadow-outline"
-                type="text" placeholder="4" />
+                <div class="custom-input">
+                {{userProviderPrimaryInformation?.yearsOfExperience}}
+              </div>
             </div>
 
           </div>
@@ -181,8 +182,10 @@
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 شهادة جامعية
               </label>
-              <img src="assets/images/noImg.svg" alt="" class="noImg"/>
+              <div class="custom-EID">
+                <img [src]="userProviderPrimaryInformation?.collegeDegreePhoto">
 
+              </div>
             </div>
           </div>
 
@@ -193,27 +196,29 @@
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 تصريح مزاولة المهنة
               </label>
-              <img src="assets/images/noImg.svg" alt="" class="noImg"/>
+              <div class="custom-EID">
+                <img [src]="userProviderPrimaryInformation?.practicingTheProfessionCertificatePhoto">
 
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="footer-tab mt-3">
         <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
-          type="submit" tabindex="-1">
+          type="submit" tabindex="-1" (click)="rejectRequest()">
           <div>
             رفض الطلب
           </div>
         </button>
-        <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next">
+        <!-- <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next">
 
           <div>
             التالي
           </div>
           <img src="assets/images/right-arrow.svg" alt="" />
 
-        </button>
+        </button> -->
 
       </div>
     </div>
@@ -226,9 +231,9 @@
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 الخدمة
               </label>
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-[#000] leading-tight focus:outline-none focus:shadow-outline"
-                type="text" placeholder="طبيب  بيطري" />
+              <div class="custom-input">
+                {{userProviderSpecialty?.serviceProviderType}}
+               </div>
             </div>
 
           </div>
@@ -240,9 +245,11 @@
               <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
                 التخصص
               </label>
-              <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-[#000] leading-tight focus:outline-none focus:shadow-outline"
-              type="text" placeholder="" />
+             <div class="custom-input">
+              <span class="specialist" *ngFor="let specialist of userProviderSpecialty?.animalCategories">
+                {{specialist?.name_ar}}
+              </span>
+             </div>
             </div>
           </div>
 
@@ -251,117 +258,63 @@
       </div>
       <div class="footer-tab mt-3">
         <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
-          type="submit" tabindex="-1">
+          type="submit" tabindex="-1" (click)="rejectRequest()">
           <div>
             رفض الطلب
           </div>
         </button>
-        <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next">
+        <!-- <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next">
 
           <div>
             التالي
           </div>
           <img src="assets/images/right-arrow.svg" alt="" />
 
-        </button>
+        </button> -->
 
       </div>
     </div>
     <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
-      <div class="date-tab">
-        <h5>الرياض</h5>
+      <div class="date-tab" *ngFor="let item of userWorkingDetailsAndHours">
+        <h5>{{item?.district_Name_ar}}</h5>
        <div class="d-flex align-items-center gap-4 mb-3">
         <div class="d-flex flex-column">
           <span >تكلفة الزيارة  </span>
-          <span class="cost">100 ر،س </span>
+          <span class="cost">{{item?.initialCost}} ر،س </span>
         </div>
         <div class="d-flex flex-column">
           <span >تكلفة الزيارة  </span>
-          <span class="cost">60 ر،س </span>
+          <span class="cost">{{item?.additionalCost}} ر،س </span>
         </div>
        </div>
        <hr>
-       <div class="d-flex justify-content-between mt-5">
-        <h5>السبت</h5>
-        <div class="d-flex align-items-center">
+       <div class="d-flex justify-content-between mt-5" *ngFor="let workingHour  of item?.workingHours">
+        <h5>{{workingHour?.day}}</h5>
+        <div class="d-flex align-items-center" *ngFor="let time of workingHour .startingAndEndingTime">
           <div class="date-box">
-            9 :00 AM
+            {{ time.startingTime  | timeFormat }}
           </div>
           <div >
             <img src="assets/images/arrow-right-1.svg" alt="" />
           </div>
           <div class="date-box">
-            5 :00 AM
+            {{ time.endTime | timeFormat }}
           </div>
         </div>
        </div>
-       <div class="d-flex justify-content-between mt-3">
-        <h5>السبت</h5>
-        <div class="d-flex align-items-center">
-          <div class="date-box">
-            9 :00 AM
-          </div>
-          <div >
-            <img src="assets/images/arrow-right-1.svg" alt="" />
-          </div>
-          <div class="date-box">
-            5 :00 AM
-          </div>
-        </div>
-       </div>
+
       </div>
-      <div class="date-tab">
-        <h5>الرياض</h5>
-       <div class="d-flex align-items-center gap-4 mb-3">
-        <div class="d-flex flex-column">
-          <span >تكلفة الزيارة  </span>
-          <span class="cost">100 ر،س </span>
-        </div>
-        <div class="d-flex flex-column">
-          <span >تكلفة الزيارة  </span>
-          <span class="cost">60 ر،س </span>
-        </div>
-       </div>
-       <hr>
-       <div class="d-flex justify-content-between mt-5">
-        <h5>السبت</h5>
-        <div class="d-flex align-items-center">
-          <div class="date-box">
-            9 :00 AM
-          </div>
-          <div >
-            <img src="assets/images/arrow-right-1.svg" alt="" />
-          </div>
-          <div class="date-box">
-            5 :00 AM
-          </div>
-        </div>
-       </div>
-       <div class="d-flex justify-content-between mt-3">
-        <h5>السبت</h5>
-        <div class="d-flex align-items-center">
-          <div class="date-box">
-            9 :00 AM
-          </div>
-          <div >
-            <img src="assets/images/arrow-right-1.svg" alt="" />
-          </div>
-          <div class="date-box">
-            5 :00 AM
-          </div>
-        </div>
-       </div>
-      </div>
+
       <div class="footer-tab mt-3">
         <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
-          type="submit" tabindex="-1">
+          type="submit" tabindex="-1" (click)="rejectRequest()">
           <div>
             رفض الطلب
           </div>
         </button>
         <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next"
         id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
-        role="tab" aria-controls="nav-profile" aria-selected="false" >
+        role="tab" aria-controls="nav-profile" aria-selected="false" (click)="acceptRequest()">
 
           <div>
             قبول

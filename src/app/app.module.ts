@@ -14,6 +14,7 @@ import { AdminComponent } from './areas/admin/admin.component';
 import { RouterModule } from '@angular/router';
 import { AdminLayoutModule } from './areas/admin/admin-layout.module';
 import { CompactMenuNavModule } from './compact-menu-nav/compact-menu-nav.module';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [AppComponent, AdminComponent],
   imports: [
@@ -34,6 +35,9 @@ import { CompactMenuNavModule } from './compact-menu-nav/compact-menu-nav.module
       },
 
     ]),
+    ToastrModule.forRoot({
+      positionClass :'toast-top-left'
+    })
   ],
 
   providers: [

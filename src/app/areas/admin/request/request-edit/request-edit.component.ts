@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MembersService } from '../service/members.service';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'request-edit',
@@ -10,6 +13,32 @@ export class RequestEditComponent {
   selectFile!: HTMLInputElement;
   singleFile!: File;
   photoName!: string;
+  userID:any;
+  userPrimaryInformation: any;
+  userProviderPrimaryInformation: any;
+  userProviderSpecialty: any;
+  userWorkingDetailsAndHours: any;
+
+  constructor(private membersService: MembersService,private activatedRoute: ActivatedRoute,private toastr: ToastrService) {}
+
+  ngOnInit(): void {
+    this.userID = this.activatedRoute.snapshot.params['id'];
+
+    // const filter: paramsRequest = {
+    //   page: this.page,
+    //   pageSize: this.pageSize,
+    //   ServiceProviderTypes: this.selectServiceProviderTypes,
+    //   ActivationStatus: this.selectActivationStatus,
+    //   AnimalCategories: this.selectAnimalCategories,
+    //   ServiceProviderId: this.numberValue,
+    // };
+    this.getServiceProviderPrimaryInformation();
+    this.getServiceProviderWorkingAndScientificExperience();
+    this.getServiceProviderSpecialty();
+    this.getServiceProviderWorkingDetailsAndHours()
+  }
+
+
   addImage(){
     this.selectFile = document.createElement('input');
     this.selectFile.type = 'file';
@@ -58,5 +87,71 @@ export class RequestEditComponent {
 
         }
       }
+  }
+  getServiceProviderPrimaryInformation() {
+    this.membersService.getServiceProviderPrimaryInformation(`${this.userID}`).subscribe((res) => {
+      this.userPrimaryInformation = res.result;
+    });
+  }
+  getServiceProviderWorkingAndScientificExperience() {
+    this.membersService.getServiceProviderWorkingAndScientificExperience(`${this.userID}`).subscribe((res) => {
+      this.userProviderPrimaryInformation = res.result;
+      //console.log(res);
+    });
+  }
+
+  getServiceProviderSpecialty() {
+    this.membersService.getServiceProviderSpecialty(`${this.userID}`).subscribe((res) => {
+      this.userProviderSpecialty= res.result;
+      //console.log(res);
+    });
+  }
+
+  getServiceProviderWorkingDetailsAndHours() {
+    this.membersService.getServiceProviderWorkingDetailsAndHours(`${this.userID}`).subscribe((res) => {
+      this.userWorkingDetailsAndHours= res.result;
+     // console.log(res);
+    });
+  }
+
+  rejectRequest() {
+    const payload = {
+      activationStatus: 1,
+      serviceProviderId: this.userID
+    };
+
+    this.membersService.updateActivationStatus(payload)
+      .subscribe(
+        response => {
+          console.log('POST request successful:', response);
+          // Handle the response as needed
+          this.toastr.error('تم رفض الطلب');
+
+        },
+        error => {
+          console.error('POST request error:', error);
+          // Handle the error as needed
+        }
+      );
+  }
+
+  acceptRequest() {
+    const payload = {
+      activationStatus: 2,
+      serviceProviderId: this.userID
+    };
+
+    this.membersService.updateActivationStatus(payload)
+      .subscribe(
+        response => {
+          console.log('POST request successful:', response);
+          this.toastr.success('تم قبول الطلب');
+
+        },
+        error => {
+          console.error('POST request error:', error);
+          // Handle the error as needed
+        }
+      );
   }
 }

@@ -11,7 +11,7 @@ const routes: Routes = [
   component: AdminComponent,
   children: [
     {
-      path: "request",
+      path: "",
       loadChildren: () => import('./request/request.module').then(m => m.OrganizationModule),
     },
     {

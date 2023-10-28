@@ -16,7 +16,7 @@ import { MaterialDesignModule } from 'src/app/shared/materialDesign/material-des
     AdminLayoutRoutingModule,
     SharedModule,
     CommonModule,
-    MaterialDesignModule
+    MaterialDesignModule,
 
   ],
   providers: [],
