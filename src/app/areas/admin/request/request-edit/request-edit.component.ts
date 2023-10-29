@@ -1,7 +1,7 @@
 import { WeekDays } from './../../../../../enums';
 import { Component } from '@angular/core';
 import { MembersService } from '../service/members.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -14,17 +14,17 @@ export class RequestEditComponent {
   selectFile!: HTMLInputElement;
   singleFile!: File;
   photoName!: string;
-  userID:any;
+  userID!: number;
   userPrimaryInformation: any;
   userProviderPrimaryInformation: any;
   userProviderSpecialty: any;
   userWorkingDetailsAndHours: any;
   WeekDays = WeekDays
-  constructor(private membersService: MembersService,private activatedRoute: ActivatedRoute,private toastr: ToastrService) {}
+  constructor(private membersService: MembersService,private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService,private router: Router) {}
 
   ngOnInit(): void {
     this.userID = this.activatedRoute.snapshot.params['id'];
-
     // const filter: paramsRequest = {
     //   page: this.page,
     //   pageSize: this.pageSize,
@@ -36,7 +36,7 @@ export class RequestEditComponent {
     this.getServiceProviderPrimaryInformation();
     this.getServiceProviderWorkingAndScientificExperience();
     this.getServiceProviderSpecialty();
-    this.getServiceProviderWorkingDetailsAndHours()
+    this.getServiceProviderWorkingDetailsAndHours();
   }
 
 
@@ -111,22 +111,23 @@ export class RequestEditComponent {
   getServiceProviderWorkingDetailsAndHours() {
     this.membersService.getServiceProviderWorkingDetailsAndHours(`${this.userID}`).subscribe((res) => {
       this.userWorkingDetailsAndHours= res.result;
-     // console.log(res);
+    console.log(res);
     });
   }
 
   rejectRequest() {
     const payload = {
-      activationStatus: 1,
+      activationStatus: 3,
       serviceProviderId: this.userID
-    };
 
+    };
     this.membersService.updateActivationStatus(payload)
       .subscribe(
         response => {
           console.log('POST request successful:', response);
           // Handle the response as needed
           this.toastr.error('تم رفض الطلب');
+          this.router.navigate([""]);
 
         },
         error => {
@@ -147,6 +148,7 @@ export class RequestEditComponent {
         response => {
           console.log('POST request successful:', response);
           this.toastr.success('تم قبول الطلب');
+          this.router.navigate([""]);
 
         },
         error => {

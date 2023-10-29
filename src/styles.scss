@@ -756,3 +756,22 @@ margin: 0 3px;
 }
 
 
+@media screen and (max-width: 768px) {
+  .w-\[35\%\] {
+    width: 100% !important;
+  }
+  .w-\[85\%\].flex.gap-2 {
+    width: 100% !important;
+  }
+  .custom-flex {
+    flex-direction: column;
+  }
+  .custom-input {
+    flex-wrap: wrap;
+  }
+  .date-tab {
+    .d-flex.justify-content-between.mt-5 {
+      flex-direction: column;
+    }
+  }
+}
