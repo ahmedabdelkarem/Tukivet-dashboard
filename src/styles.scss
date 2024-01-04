@@ -622,30 +622,35 @@ body {
     padding: 18px 30px;
     color: #fff;
     margin: 24px;
+
     h5 {
       color: #111;
-font-size: 24px;
-margin-bottom: 16px ;
+      font-size: 24px;
+      margin-bottom: 16px;
     }
+
     span {
       color: #9C9C9C;
       font-size: 16px;
-font-weight: 500;
+      font-weight: 500;
     }
+
     .cost {
       color: #3F3F3F;
     }
+
     .date-box {
       border-radius: 8px;
-border: 1px solid #ECECEC;
-background: #FFF;
-color: #292929;
-font-size: 16px;
-direction: ltr;
-    padding: 16px 24px;
+      border: 1px solid #ECECEC;
+      background: #FFF;
+      color: #292929;
+      font-size: 16px;
+      direction: ltr;
+      padding: 16px 24px;
     }
 
   }
+
   hr {
     background: #C2C2C2;
   }
@@ -653,11 +658,15 @@ direction: ltr;
 
 
 // handle visiblity of checkboxes in simple menu
-.mat-mdc-button.mat-mdc-button-base, .mat-mdc-raised-button.mat-mdc-button-base, .mat-mdc-unelevated-button.mat-mdc-button-base, .mat-mdc-outlined-button.mat-mdc-button-base {
+.mat-mdc-button.mat-mdc-button-base,
+.mat-mdc-raised-button.mat-mdc-button-base,
+.mat-mdc-unelevated-button.mat-mdc-button-base,
+.mat-mdc-outlined-button.mat-mdc-button-base {
   min-width: 22%;
   justify-content: space-between;
   height: 43px;
 }
+
 .menuTrigger {
   direction: ltr;
 
@@ -666,26 +675,31 @@ direction: ltr;
   }
 }
 
-.mat-mdc-menu-item  {
+.mat-mdc-menu-item {
   .mat-icon.checked {
     display: none !important;
     pointer-events: none !important;
   }
+
   .mat-icon.empty {
     pointer-events: none !important;
   }
 }
+
 .mat-mdc-menu-item.selected {
   .mat-icon.empty {
     display: none !important;
   }
+
   .mat-icon.checked {
     display: unset !important;
   }
 }
 
 // Color menu colors
-.blue { color:blue !important}
+.blue {
+  color: blue !important
+}
 
 .img-view {
   max-width: 400px;
@@ -694,16 +708,16 @@ direction: ltr;
 
 .custom-input {
   height: 60px;
-    border-radius: 12px;
-    border: 0 !important;
-    background: var(--greys-400, #C6C6C6) !important;
-    line-height: 1.25 !important;
-    color: var(--greys-1500, #151515);
-    text-align: right;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
+  border-radius: 12px;
+  border: 0 !important;
+  background: var(--greys-400, #C6C6C6) !important;
+  line-height: 1.25 !important;
+  color: var(--greys-1500, #151515);
+  text-align: right;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
 }
 
 .custom-textArea {
@@ -728,6 +742,7 @@ direction: ltr;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 .custom-EID {
   border-radius: 12px;
   border: 1px solid var(--greys-200, #ECECEC);
@@ -737,22 +752,24 @@ direction: ltr;
   display: flex;
   justify-content: center;
   align-items: center;
+
   img {
     max-width: 300px;
     margin: auto;
     padding: 1rem;
   }
 }
+
 .custom-input .specialist {
   color: var(--primary-hover, #3A1BD0);
-font-size: 12px;
-border-radius: 32px;
-border: 1px solid var(--primary-border, #BCB1F5);
-background: var(--primary-surface, #F7F5FF);
-gap: 12px;
-padding: 2px 12px;
-display: inline-block;
-margin: 0 3px;
+  font-size: 12px;
+  border-radius: 32px;
+  border: 1px solid var(--primary-border, #BCB1F5);
+  background: var(--primary-surface, #F7F5FF);
+  gap: 12px;
+  padding: 2px 12px;
+  display: inline-block;
+  margin: 0 3px;
 }
 
 
@@ -760,18 +777,47 @@ margin: 0 3px;
   .w-\[35\%\] {
     width: 100% !important;
   }
+
   .w-\[85\%\].flex.gap-2 {
     width: 100% !important;
   }
+
   .custom-flex {
     flex-direction: column;
   }
+
   .custom-input {
     flex-wrap: wrap;
   }
+
   .date-tab {
     .d-flex.justify-content-between.mt-5 {
       flex-direction: column;
     }
+  }
+}
+
+.policy-section {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: #000;
+  color: #d6d3d3;
+  overflow: auto;
+  padding: 20px;
+  direction: ltr;
+  height: 100%;
+
+  .ltr-policy {
+    direction: ltr;
+  }
+
+  .rtl-policy {
+    direction: rtl;
+  }
+
+  p {
+    margin-top: 16px !important;
   }
 }
