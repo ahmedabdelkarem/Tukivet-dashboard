@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.page.html',
+  templateUrl: './policy.component.html',
 })
-export class HomePage {}
+export class PolicyComponent { }

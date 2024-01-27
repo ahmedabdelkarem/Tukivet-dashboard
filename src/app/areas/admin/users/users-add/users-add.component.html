@@ -1,0 +1,127 @@
+<section class="request-header container">
+  <h3> اضافة مستحدمين</h3>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true"> اضافه مستخدم</button>
+
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+
+      <div class="flex flex-column w-full mt-4">
+
+        <!-- <label for="dropzone-file"
+          class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+            </svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">قم برفع صوره
+                للاخصائي</span></p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">٢٠٠ سم * ٤٠٠ سم</p>
+          </div>
+        </label> -->
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  الاسم
+                </label>
+                <input formControlName="userName" type="text" name="search" id="search" placeholder="الاسم"
+                  class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  رقم الجوال
+                </label>
+                <input formControlName="phoneNumber" type="text" name="phone" id="phone" placeholder=" رقم الجوال"
+                  class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  الايميل
+                </label>
+                <input type="email" formControlName="email" id="email" placeholder="الايميل"
+                  class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  ناريخ الميلاد
+                </label>
+                <input type="date" formControlName="dateOfBirth" name="date" id="date" placeholder="    ناريخ الميلاد"
+                  class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  النوع
+                </label>
+                <select id="type" formControlName="gender"
+                  class="bg-gray-50 border border-gray-300 text-[#272D37]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+                  <option selected>اختر النوع</option>
+                  <option *ngFor="let gender of genders" [ngValue]="gender.id">{{gender.name}}</option>
+
+                </select>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  الجنسية
+                </label>
+                <select id="nationality" formControlName="nationalityId"
+                  class="bg-gray-50 border border-gray-300 text-[#272D37]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+                  <option selected>اختر الجنسية </option>
+                  <option *ngFor="let nationality of nationalities" [ngValue]="nationality.id">{{nationality.name_ar}}
+                  </option>
+
+                </select>
+              </div>
+
+            </div>
+          </div>
+          <div class="footer-tab mt-3">
+            <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
+              type="submit" tabindex="-1" (click)="rejectRequest()">
+              <div>
+                الغاء
+              </div>
+            </button>
+            <button [disabled]="userForm.invalid"
+              class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next"
+              type="submit">
+
+              <div>
+                اضافه
+              </div>
+
+            </button>
+
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

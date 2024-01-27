@@ -13,48 +13,55 @@ import { BreakpointService } from './shared/service/breakpoint/breakpoint.servic
 })
 export class AppComponent {
   title = 'admin';
-  hideHeader=true;
+  hideHeader = true;
   readonly currentPage$ = new BehaviorSubject<string | undefined>('');
-  menuNodes  =  [new MenuNavNode(
-      'الرئيسية',
-      'dashboard',
-      ['', ''],
-      [],
+  menuNodes = [new MenuNavNode(
+    'الرئيسية',
+    'dashboard',
+    ['', ''],
+    [],
 
-    ),
-    new MenuNavNode(
-      'طلبات مقدمي الخدمات',
-      'organizations',
-      ['', ''],
-      [],
+  ),
+  new MenuNavNode(
+    'طلبات مقدمي الخدمات',
+    'organizations',
+    ['', '/'],
+    [],
 
-    ),
-    new MenuNavNode(
-      'المستخدمين',
-      'tools',
-      ['', ''],
-      [],
+  ),
+  new MenuNavNode(
+    'المستخدمين',
+    'tools',
+    ['', 'users'],
+    [],
 
-    ),
-    new MenuNavNode(
-      'مقدمي الخدمات',
-      'templates',
-      ['', ''],
-      [],
+  ),
+  new MenuNavNode(
+    'الاطباء',
+    'templates',
+    ['', 'doctors'],
+    [],
 
-    )
+  )
+    ,
+  new MenuNavNode(
+    'مقدمي الرعايه البيطرية',
+    'templates',
+    ['', 'veterinary-care'],
+    [],
 
+  )
 
   ]
-  isSmwidth!:boolean;
-  constructor(private readonly router: Router,private readonly iconService: IconService,private breakpointService:BreakpointService,private activatedRoute: ActivatedRoute){
+  isSmwidth!: boolean;
+  constructor(private readonly router: Router, private readonly iconService: IconService, private breakpointService: BreakpointService, private activatedRoute: ActivatedRoute) {
     this.initRouterEvents();
     this.breakpointService.isMobile$.pipe(untilDestroyed(this))
-    .subscribe((isSmWidth:boolean) => {
-     this.isSmwidth=isSmWidth;
-    });
-     // Load custom icons
-     this.iconService.registerIcons();
+      .subscribe((isSmWidth: boolean) => {
+        this.isSmwidth = isSmWidth;
+      });
+    // Load custom icons
+    this.iconService.registerIcons();
   }
 
   private readonly isNavigationEnd = (event: Event): event is NavigationEnd =>
@@ -66,9 +73,14 @@ export class AppComponent {
         map((event) => (event.url || '')),
         untilDestroyed(this)
       )
-      .subscribe((currentPage:string| any) => {
+      .subscribe((currentPage: string | any) => {
 
         if (currentPage.includes('auth')) {
+          this.hideHeader = true;
+        } else {
+          this.hideHeader = false;
+        }
+        if (currentPage.includes('policy')) {
           this.hideHeader = true;
         } else {
           this.hideHeader = false;

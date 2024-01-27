@@ -11,34 +11,14 @@ import { MenuNavNode } from 'src/app/models/menu-nav-node.model';
   selector: 'ga-extended-menu-nav-sidebar',
   templateUrl: './extended-menu-nav-sidebar.component.html',
 })
-export class ExtendedMenuNavSidebarComponent  {
+export class ExtendedMenuNavSidebarComponent {
   @Input() activeLink: MenuNavNode | undefined;
   @Input() menuNodes: Array<MenuNavNode> | undefined;
   @Input() menuOpened?: boolean;
-  @Input() currentPage?:string|null;
+  @Input() currentPage?: string | null;
 
-  fixedMenuNodes  =  [new MenuNavNode(
-    'Users',
-    'users',
-    ['', ''],
-    [],
-    
-  ),
-  new MenuNavNode(
-    'Settings',
-    'settings',
-    ['', ''],
-    [],
-    
-  ),
-  new MenuNavNode(
-    'Logout',
-    'logout',
-    ['', ''],
-    [],
-    
-  ),
-]
+  fixedMenuNodes = [
+  ]
 
   itemHovered = false;
 
@@ -46,7 +26,7 @@ export class ExtendedMenuNavSidebarComponent  {
 
   }
 
- 
+
 
   @Output() readonly closeMenu = new EventEmitter<undefined>();
 
@@ -78,7 +58,7 @@ export class ExtendedMenuNavSidebarComponent  {
   }
 
   onLogoClicked(): void {
-   // this.router.navigate([Module.Backoffice, Page.DashboardMerchantPortal]);
+    // this.router.navigate([Module.Backoffice, Page.DashboardMerchantPortal]);
   }
 
 

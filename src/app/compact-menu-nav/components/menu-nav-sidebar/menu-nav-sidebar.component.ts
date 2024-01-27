@@ -14,38 +14,18 @@ import { MenuNavNode } from 'src/app/models/menu-nav-node.model';
   selector: 'ga-menu-nav-sidebar',
   templateUrl: './menu-nav-sidebar.component.html',
 })
-export class MenuNavSidebarComponent  {
+export class MenuNavSidebarComponent {
   @Input() activeLink: MenuNavNode | undefined;
   @Input() menuNodes: Array<MenuNavNode> | undefined;
   @Input() menuOpened?: boolean;
   @Input() currentPage?: string | null;
-  fixedMenuNodes  =  [new MenuNavNode(
-    'Users',
-    'users',
-    ['', ''],
-    [],
-    
-  ),
-  new MenuNavNode(
-    'Settings',
-    'settings',
-    ['', ''],
-    [],
-    
-  ),
-  new MenuNavNode(
-    'Logout',
-    'logout',
-    ['', ''],
-    [],
-    
-  ),
-]
+  fixedMenuNodes = [
+  ]
   constructor(private readonly router: Router) {
-    
+
   }
 
-  
+
 
   @Output() readonly closeMenu = new EventEmitter<undefined>();
 

@@ -1,0 +1,430 @@
+<section class="request-header container">
+  <h3> طلب إضافة مقدم خدمة</h3>
+  <span>#123456</span>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true">المعلومات الاساسية</button>
+      <button class="nav-link" [disabled]="!doctorForm.valid" id="nav-profile-tab" data-bs-toggle="tab"
+        data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+        aria-selected="false">الهويه</button>
+      <button class="nav-link" [disabled]="!doctorForm.valid" id="nav-contact-tab" data-bs-toggle="tab"
+        data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">التأهيل
+        العلمي والمهني</button>
+      <button class="nav-link" [disabled]="!doctorForm.valid" id="nav-specilization-tab" data-bs-toggle="tab"
+        data-bs-target="#nav-specilization" type="button" role="tab" aria-controls="nav-specilization-tab"
+        aria-selected="false">التخصص</button>
+      <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button"
+        role="tab" aria-controls="nav-disabled" aria-selected="false">اماكن
+        العمل</button>
+      <button class="nav-link" [disabled]="!doctorForm.valid" id="nav-disableda-tab" data-bs-toggle="tab"
+        data-bs-target="#nav-disableda" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false">
+        معلومات اخري</button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+
+
+      <div class="flex flex-column w-full mt-4">
+        <form [formGroup]="doctorForm">
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  الاسم
+                </label>
+                <input formControlName="name" type="text" name="search" id="search" placeholder="الاسم"
+                  class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  رقم الجوال
+                </label>
+                <input formControlName="phoneNumber" type="text" name="phone" id="phone" placeholder=" رقم الجوال"
+                  class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  العنوان
+                </label>
+                <input type="text" formControlName="address" id="address" placeholder="العنوان"
+                  class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  ناريخ الميلاد
+                </label>
+                <input type="date" formControlName="birthDate" name="date" id="date" placeholder="    ناريخ الميلاد"
+                  class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  الجنسية
+                </label>
+                <select id="nationality" formControlName="nationalityID"
+                  class="bg-gray-50 border border-gray-300 text-[#272D37]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+                  <option selected>اختر الجنسية </option>
+                  <option *ngFor="let nationality of nationalities" [ngValue]="nationality.nationalityId">
+                    {{nationality.name_ar}}
+                  </option>
+
+                </select>
+              </div>
+
+            </div>
+          </div>
+          <div class="footer-tab mt-3">
+            <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
+              type="submit" tabindex="-1" (click)="rejectRequest()">
+              <div>
+                الغاء
+              </div>
+            </button>
+            <button type="submit" (click)="onSubmit()"
+              class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next">
+
+              <div>
+                اضافه
+              </div>
+
+            </button>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+      <div class="flex flex-column w-full mt-4">
+        <form [formGroup]="nationalForm">
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  رقم الهوية / الجواز / الاقامة
+                </label>
+                <input formControlName="nationalId" type="text" name="search" id="search"
+                  placeholder="رقم الهوية / الجواز / الاقامة"
+                  class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                  صورة الهوية / الجواز / الاقامة
+                </label>
+                <input formControlName="idImagePath" type="file" name="phone" id="phone"
+                  class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </div>
+
+            </div>
+
+          </div>
+          <div class="footer-tab mt-3">
+            <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
+              type="submit" tabindex="-1" (click)="rejectRequest()">
+              <div>
+                الغاء
+              </div>
+            </button>
+            <button type="submit"
+              class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next"
+              (click)="updateNationalID()">
+
+              <div>
+                اضافه
+              </div>
+
+            </button>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+
+      <form [formGroup]="workExperinceForm">
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <div class="mb-4">
+              <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                عدد سنين الخبره
+              </label>
+              <input formControlName="yearsOfExperience" type="number" name="search" id="search"
+                placeholder="عدد سنين الخبره"
+                class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+            </div>
+
+          </div>
+
+          <div class="col-md-6">
+            <div class="mb-4">
+              <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                شهادة جامعية
+              </label>
+              <input formControlName="collegeDegreePhotoPath" type="file" name="aa" id="dasd"
+                class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+            </div>
+
+          </div>
+
+          <div class="col-md-6">
+            <div class="mb-4">
+              <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                تصريح مزاولة المهنة
+              </label>
+              <input formControlName="practicingTheProfessionCertificatePhotoPath" type="file" name="phone" id="phone"
+                class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+            </div>
+
+          </div>
+        </div>
+        <div class="footer-tab mt-3">
+          <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
+            type="submit" tabindex="-1" (click)="rejectRequest()">
+            <div>
+              الغاء
+            </div>
+          </button>
+          <button type="submit"
+            class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next"
+            (click)="updateAddSaveWorkExperince()">
+
+            <div>
+              اضافه
+            </div>
+
+          </button>
+
+        </div>
+      </form>
+    </div>
+    <div class="tab-pane fade" id="nav-specilization" role="tabpanel" aria-labelledby="nav-specilization-tab"
+      tabindex="0">
+
+      <div class="d-flex mt-4">
+        <button class="box" *ngFor="let box of boxes" [ngClass]="{ 'active': box.isActive }" (click)="toggleBox(box)">
+          <h6>{{ box.label }}</h6>
+          <img [src]="'assets/images/' + box.image" alt="img" />
+        </button>
+
+      </div>
+      <div class="footer-tab mt-3">
+        <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
+          type="submit" tabindex="-1" (click)="rejectRequest()">
+          <div>
+            الغاء
+          </div>
+        </button>
+        <button type="submit"
+          class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next" type="submit"
+          (click)="updateSpecilization()">
+
+          <div>
+            اضافه
+          </div>
+
+        </button>
+
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
+      <div class="nav nav-tabs custom-tabs" id="nav-tab-location" role="tablist">
+        <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#nav-one" type="button"
+          role="tab" aria-controls="nav-one" aria-selected="true">زيارات</button>
+        <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#nav-two" type="button"
+          role="tab" aria-controls="nav-two" aria-selected="false">استشارات</button>
+      </div>
+      <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-tab-one">
+        <div class="date-tab">
+          <h5>يشيش</h5>
+          <div class="d-flex align-items-center gap-4 mb-3">
+            <div class="d-flex flex-column">
+              <span>تكلفة الزيارة </span>
+              <span class="cost">20 ر،س </span>
+            </div>
+            <div class="d-flex flex-column">
+              <span>تكلفة الزيارة </span>
+              <span class="cost">25 ر،س </span>
+            </div>
+          </div>
+          <hr>
+
+          <div class="d-flex justify-content-between mt-5">
+            <h5>Monaday</h5>
+            <div>
+
+              <form [formGroup]="timeForm" class="d-flex align-items-center">
+                <input formControlName="time" type="time"
+                  class="form-input border date-box custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+
+                <div>
+                  <img width="60" src="assets/images/arrow-right-1.svg" alt="" />
+                </div>
+                <input formControlName="time" type="time"
+                  class="form-input border date-box custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <button class="add-new-location">
+          إضافة مكان عمل جديد
+        </button>
+        <div class="date-tab">
+          <form [formGroup]="districtForm">
+            <div class="row">
+
+              <div class="col-md-4">
+                <div class="mb-4">
+                  <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                    الحي
+                  </label>
+                  <select id="nationality" formControlName="nationalityID"
+                    class="bg-gray-50 border border-gray-300 text-[#272D37]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+                    <option selected>اختر الحي </option>
+                    <option *ngFor="let district of districts" [ngValue]="district.nationalityId">
+                      {{district.name_ar}}
+                    </option>
+
+                  </select>
+                </div>
+
+              </div>
+              <div class="col-md-4">
+                <div class="mb-4">
+                  <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                    تكلفة الزيارة
+                  </label>
+                  <input formControlName="vistCost" type="number"
+                    class="form-input border date-box custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+                </div>
+
+              </div>
+              <div class="col-md-4">
+                <div class="mb-4">
+                  <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                    تكلفة الزيارة
+                  </label>
+                  <input formControlName="vistCost" type="number"
+                    class="form-input border date-box custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+                </div>
+
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">السبت</label>
+
+              </div>
+              <button type="button" class="btn-custom-add" (click)="addTimeFields()">
+                إضافة توقيت
+              </button>
+
+
+
+            </div>
+            <form [formGroup]="myForm">
+              <div formArrayName="times" class="row">
+                <div class="col-md-3 d-flex align-items-center" *ngFor="let timeGroup of timesArray; let i = index"
+                  [formGroup]="timeGroup">
+                  <input
+                    class="form-input border date-box custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none"
+                    formControlName="time1" id="time1" type="time">
+                  <div>
+                    <img width="60" src="assets/images/arrow-right-1.svg" alt="" />
+                  </div>
+                  <input
+                    class="form-input border date-box custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none"
+                    formControlName="time2" id="time2" type="time">
+                </div>
+              </div>
+              <!-- other form controls and buttons -->
+
+            </form>
+          </form>
+
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-two" role="tabpanel" aria-labelledby="nav-tab-two">..2.</div>
+
+    </div>
+    <div class="tab-pane fade" id="nav-disableda" role="tabpanel" aria-labelledby="nav-disableda-tab" tabindex="0">
+
+      <form [formGroup]="otherInformationForm">
+        <div class="row mt-4">
+
+          <div class="col-md-12">
+            <div class="mb-4">
+
+              <input formControlName="selfPhotoImagePath" type="file" name="phone" id="phone"
+                class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="mb-4">
+              <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                اللقب
+              </label>
+              <input formControlName="title" type="text" name="search" id="search" placeholder="اللقب"
+                class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="mb-4">
+              <label class="block text-[#A2A2A2] text-sm font-bold mb-2">
+                الوصف
+              </label>
+              <input formControlName="description" type="text" name="search" id="search" placeholder="الوصف"
+                class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none" />
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="footer-tab mt-3">
+          <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
+            type="submit" tabindex="-1" (click)="rejectRequest()">
+            <div>
+              الغاء
+            </div>
+          </button>
+          <button type="submit"
+            class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next"
+            (click)="updateOtherInformation()">
+
+            <div>
+              اضافه
+            </div>
+
+          </button>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,119 @@
+import { WeekDays } from '../../../../../enums';
+import { Component } from '@angular/core';
+import { CareService } from '../service/Care.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
+@Component({
+  selector: 'veterinary-care-edit',
+  templateUrl: './veterinary-care-edit.component.html'
+})
+export class VeterinaryCareEditComponent {
+  photoImage!: string | ArrayBuffer | null;
+  fileExtension: string | undefined;
+  selectFile!: HTMLInputElement;
+  singleFile!: File;
+  photoName!: string;
+  userID!: number;
+  doctorInformation: any;
+  userProviderPrimaryInformation: any;
+  userProviderSpecialty: any;
+  userWorkingDetailsAndHours: any;
+  WeekDays = WeekDays
+  constructor(private careService: CareService, private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.userID = this.activatedRoute.snapshot.params['id'];
+    // const filter: paramsRequest = {
+    //   page: this.page,
+    //   pageSize: this.pageSize,
+    //   ServiceProviderTypes: this.selectServiceProviderTypes,
+    //   ActivationStatus: this.selectActivationStatus,
+    //   AnimalCategories: this.selectAnimalCategories,
+    //   ServiceProviderId: this.numberValue,
+    // };
+    this.getDoctorRequests();
+    // this.getServiceProviderWorkingAndScientificExperience();
+    // this.getServiceProviderSpecialty();
+    // this.getServiceProviderWorkingDetailsAndHours();
+  }
+
+
+  getDoctorRequests() {
+    this.careService.getDoctorRequests(`${this.userID}`, 1).subscribe((res) => {
+      this.doctorInformation = res.result;
+      console.log(res);
+    });
+  }
+  getServiceProviderWorkingAndScientificExperience() {
+    this.careService.getServiceProviderWorkingAndScientificExperience(`${this.userID}`).subscribe((res) => {
+      this.userProviderPrimaryInformation = res.result;
+      //console.log(res);
+    });
+  }
+
+  getServiceProviderSpecialty() {
+    this.careService.getServiceProviderSpecialty(`${this.userID}`).subscribe((res) => {
+      this.userProviderSpecialty = res.result;
+      //console.log(res);
+    });
+  }
+
+  getServiceProviderWorkingDetailsAndHours() {
+    this.careService.getServiceProviderWorkingDetailsAndHours(`${this.userID}`).subscribe((res) => {
+      this.userWorkingDetailsAndHours = res.result;
+      console.log(res);
+    });
+  }
+
+  rejectRequest() {
+    const payload = {
+      activationStatus: 3,
+      serviceProviderId: this.userID
+
+    };
+    this.careService.updateActivationStatus(payload)
+      .subscribe(
+        response => {
+          console.log('POST request successful:', response);
+          // Handle the response as needed
+          this.toastr.error('تم رفض الطلب');
+          this.router.navigate([""]);
+
+        },
+        error => {
+          console.error('POST request error:', error);
+          // Handle the error as needed
+        }
+      );
+  }
+
+  acceptRequest() {
+    const payload = {
+      activationStatus: 2,
+      serviceProviderId: this.userID
+    };
+
+    this.careService.updateActivationStatus(payload)
+      .subscribe(
+        response => {
+          console.log('POST request successful:', response);
+          this.toastr.success('تم قبول الطلب');
+          this.router.navigate([""]);
+
+        },
+        error => {
+          console.error('POST request error:', error);
+          // Handle the error as needed
+        }
+      );
+  }
+
+
+}
+
+export class ExampleComponent {
+  days = Object.values(WeekDays.Monday);
+
+}

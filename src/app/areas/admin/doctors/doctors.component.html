@@ -1,0 +1,256 @@
+<div class="content-header section-margin-bottom">
+  <div class="users-header">
+    <div class="content-header-title">
+      <img src="assets/images/organization.svg" alt="img" />
+      <h4> الاطباء</h4>
+    </div>
+    <div class="add-users" routerLink="add">
+      <img src="assets/images/add.svg" alt="img" />
+      <h4>اضافه طبيب</h4>
+    </div>
+  </div>
+  <!-- <div class="content-header-toolbar">
+    <button class="btn btn-secondary">
+      <img src="assets/images/import.svg" alt="img" />
+      <h4>Import</h4>
+    </button>
+    <button
+      class="btn btn-secondary menu-btn"
+      [matMenuTriggerFor]="menu"
+      mat-icon-button
+      aria-label="Example icon-button with a menu"
+    >
+      <img src="assets/images/export.svg" alt="img" />
+      <h4 class="export">
+        Export All
+        <img src="assets/images/download.svg" alt="img" />
+      </h4>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span>Export To Xls</span>
+      </button>
+      <button mat-menu-item>
+        <span>Export To PDF</span>
+      </button>
+      <button mat-menu-item>
+        <span>Export To Doc</span>
+      </button>
+    </mat-menu>
+    <button class="btn btn-brand">
+      <h4>+ Add New</h4>
+    </button>
+  </div> -->
+</div>
+<div class="flex content-body gap-2 px-4 py-7 sm:max-xl:flex-wrap section-margin-bottom">
+  <div class="w-[85%] flex gap-2 sm:max-xl:w-full">
+    <div class="w-full flex gap-2 custom-flex">
+      <label class="relative text-gray-400 focus-within:text-gray-600 block w-[35%]">
+        <img src="assets/images/search.svg" alt="img"
+          class="pointer-events-none absolute top-1/2 transform -translate-y-1/2 left-3" />
+        <input type="text" name="search" id="search" placeholder="بحث برقم الطلب"
+          class="form-input border custom-border-gray py-3 px-4 bg-white placeholder-gray-400 text-gray-500 appearance-none w-full block pl-10 focus:outline-none"
+          (keypress)="handleKeyPress($event)" (change)="changeNumber()" [(ngModel)]="numberValue" />
+      </label>
+      <button mat-raised-button class="menuTrigger" [matMenuTriggerFor]="specialist">
+        التخصص <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <!-- #docregion color menu -->
+
+      <mat-menu #specialist="matMenu">
+        <button mat-menu-item *ngFor="let item of serviceProviderTypes" (click)="selectFilter($event, item['id'], 1)">
+          <mat-icon class="empty">check_box_outline_blank</mat-icon>
+          <mat-icon class="checked blue">check_box</mat-icon>
+          {{ item["name_ar"] }}
+        </button>
+      </mat-menu>
+      <button mat-raised-button class="menuTrigger" [matMenuTriggerFor]="requestStatus">
+        حالة الطلب <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <!-- #docregion color menu -->
+
+      <mat-menu #requestStatus="matMenu">
+        <button mat-menu-item *ngFor="let item of serviceProviderActivationStatus"
+          (click)="selectFilter($event, item['id'], 2)">
+          <mat-icon class="empty">check_box_outline_blank</mat-icon>
+          <mat-icon class="checked blue">check_box</mat-icon>
+          {{ item["name_ar"] }}
+        </button>
+      </mat-menu>
+      <button mat-raised-button class="menuTrigger" [matMenuTriggerFor]="animals">
+        الحيوان <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <!-- #docregion color menu -->
+
+      <mat-menu #animals="matMenu">
+        <button mat-menu-item *ngFor="let item of animalCategoriesDTO" (click)="selectFilter($event, item['id'], 3)">
+          <mat-icon class="empty">check_box_outline_blank</mat-icon>
+          <mat-icon class="checked blue">check_box</mat-icon>
+          {{ item["name_ar"] }}
+        </button>
+      </mat-menu>
+
+    </div>
+  </div>
+
+
+</div>
+<div class="content-body section-margin-bottom">
+
+  <div class="overflow-y-auto">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="select">
+        <th mat-header-cell
+          class="w-[5.1%] text-sm font-bold text-right leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell class="text-right" *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-right leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef>
+          id
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          <div class="flex items-center my-2">
+            <div class="mx-2">
+              <div class="font-medium text-base text-[#272D37] mb-1">
+                {{ element.id }}
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-right leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef>
+          الأسم
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          <div class="flex items-center my-2">
+            <div class="mx-2">
+              <div class="font-medium text-base text-[#272D37] mb-1">
+                {{ element.name_ar ?? "-" }}
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef>
+          اللقب
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          {{ element?.title ?? "-" }}
+        </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="animalCategories">
+        <th mat-header-cell
+          class="w-[25%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef>
+          الحيوان
+        </th>
+        <td mat-cell class="text-center animals-categories" *matCellDef="let element">
+          <span class="categories-items" *ngFor="let item of element.animalCategories">
+            {{ item?.name_ar }}
+          </span>
+          <span class="categories-items" *ngIf="element.animalCategories == 0">
+            -
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef>
+          رقم الجوال
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          {{ element.phoneNumber }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="workstations">
+        <th mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef>
+          اماكن العمل
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          {{ element.workPlaces ?? "-" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="requestNumbers">
+        <th mat-header-cell
+          class="w-[16.6%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef>
+          عدد الطلبات
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          {{ element.requestsCount }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="requestsStatus">
+        <th mat-header-cell
+          class="w-[25%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef>
+          حالة الطلب
+        </th>
+        <td mat-cell class="text-center" *matCellDef="let element">
+          <span class="activation-status">
+            {{ element?.activationStatus.name_ar }}
+          </span>
+
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sub-menu">
+        <th mat-header-cell
+          class="w-[5.1%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+          *matHeaderCellDef></th>
+        <td mat-cell class="text-center" class="cursor-pointer" *matCellDef="let element">
+          <mat-icon [svgIcon]="'sub-menu'" [matMenuTriggerFor]="dropdown" mat-icon-button
+            class="rounded-sm align-middle">
+          </mat-icon>
+          <mat-menu #dropdown="matMenu">
+            <button mat-menu-item class="matMenu-dropdown" [routerLink]="['edit',element.id]">
+              <img src="assets/images/EditIcon.svg" />
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/delete.svg" />
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator data-testid="matPaginator" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizes"
+      (page)="pageChange($event)">
+    </mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,254 @@
+<div class="content-header section-margin-bottom">
+  <div class="users-header request-header">
+    <div class="content-header-title">
+      <img src="assets/images/organization.svg" alt="img" />
+      <h4>تفاصيل المستخدم</h4>
+    </div>
+    <div class="d-flex footer-tab gap-2">
+      <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
+        type="submit" tabindex="-1">
+        <div>
+          ايقاف
+        </div>
+      </button>
+      <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-reject"
+        type="submit" tabindex="-1">
+        <div>
+          الغاء
+        </div>
+      </button>
+      <button class="px-5 py-2 mt-10 text-base rounded-[7px] flex justify-center gap-4 items-center btn-next"
+        type="submit" tabindex="-1">
+        <div>
+          تعديل
+        </div>
+      </button>
+    </div>
+  </div>
+
+</div>
+<section class="request-header container">
+  <div class="user-information">
+    <h4> {{userInformation?.userName}}</h4>
+    <div class="d-flex gap-10 mt-3">
+      <div class="d-flex flex-column">
+        <h3>الايميل</h3>
+        <span>{{userInformation?.email}}</span>
+      </div>
+      <div class="d-flex flex-column">
+        <h3>رقم الموبايل</h3>
+        <span>{{userInformation?.phoneNumber}}</span>
+      </div>
+      <div class="d-flex flex-column">
+        <h3>تاريخ الميلاد</h3>
+        <span>{{userInformation?.dateOfBirth}}</span>
+      </div>
+      <div class="d-flex flex-column">
+        <h3>الجنسية</h3>
+        <span>{{userInformation?.nationality}}</span>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true"> الطلبات</button>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
+        role="tab" aria-controls="nav-profile" aria-selected="false"> عنواين المستخدم</button>
+
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active mt-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+      tabindex="0">
+      <div class="nav nav-tabs" id="information-tab" role="tablist">
+        <button class="nav-link active" id="information-tab-next" data-bs-toggle="tab" data-bs-target="#nav-next"
+          type="button" role="tab" aria-controls="nav-next" aria-selected="true"> قادمة</button>
+        <button class="nav-link" id="information-tab-back" data-bs-toggle="tab" data-bs-target="#nav-back" type="button"
+          role="tab" aria-controls="nav-back" aria-selected="false">سابقة</button>
+        <button class="nav-link" id="information-tab-rejected" data-bs-toggle="tab" data-bs-target="#nav-rejected"
+          type="button" role="tab" aria-controls="nav-rejected" aria-selected="false"> ملغية</button>
+      </div>
+      <div class="tab-pane fade show active" id="nav-next" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+        <div class="overflow-y-auto mt-5">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Checkbox Column -->
+
+            <ng-container matColumnDef="orderId">
+              <th mat-header-cell
+                class="w-[10%] text-sm font-bold text-right leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+                *matHeaderCellDef>
+                مقدم الخدم
+              </th>
+              <td mat-cell class="text-center" *matCellDef="let element">
+                <div class="flex items-center my-2">
+                  <div class="mx-2">
+                    <div class="font-medium text-base text-[#272D37] mb-1">
+                      {{ element.orderId }}
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+            <!-- Position Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell
+                class="w-[10%] text-sm font-bold text-right leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+                *matHeaderCellDef>
+                نوع الطلب
+              </th>
+              <td mat-cell class="text-center" *matCellDef="let element">
+                <div class="flex items-center my-2">
+                  <div class="mx-2">
+                    <div class="font-medium text-base text-[#272D37] mb-1">
+                      {{ element?.serviceProvider ?? "-" }}
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="serviceProviderType">
+              <th mat-header-cell
+                class="w-[10%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+                *matHeaderCellDef>
+                التخصص
+              </th>
+              <td mat-cell class="text-center" *matCellDef="let element">
+                {{ element?.serviceProviderPhoto ?? "-" }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="animalCategories">
+              <th mat-header-cell
+                class="w-[10%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+                *matHeaderCellDef>
+                عدد الحيوانات
+              </th>
+              <td mat-cell class="text-center" *matCellDef="let element">
+                {{ element?.noOfAnimals ?? "-" }}
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="phoneNumber">
+              <th mat-header-cell
+                class="w-[10%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+                *matHeaderCellDef>
+                وقت الجلسه
+              </th>
+              <td mat-cell class="text-center" *matCellDef="let element">
+                {{ element?.startTime ?? "-" }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="yearsOfExperience">
+              <th mat-header-cell
+                class="w-[10%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+                *matHeaderCellDef>
+                وقت الجلسه
+              </th>
+              <td mat-cell class="text-center" *matCellDef="let element">
+                {{ element.endTime ?? "-" }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="registrationDate">
+              <th mat-header-cell
+                class="w-[10%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+                *matHeaderCellDef>
+                العنوان
+              </th>
+              <td mat-cell class="text-center" *matCellDef="let element">
+                {{ element?.address ?? "-" }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="noOfRequests">
+              <th mat-header-cell
+                class="w-[10%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+                *matHeaderCellDef>
+                حالة الطلب
+              </th>
+              <td mat-cell class="text-center" *matCellDef="let element">
+                {{ element?.orderStatus ?? "-" }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="activationStatus">
+              <th mat-header-cell
+                class="w-[10%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+                *matHeaderCellDef>المبلغ المدفوع</th>
+              <td mat-cell class="text-center" class="cursor-pointer" *matCellDef="let element">
+                {{ element?.totalAmount ?? "-" }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="sub-menu">
+              <th mat-header-cell
+                class="w-[5.1%] text-sm font-bold text-center leading-normal bg-[#7CC58F4D] ltr:rounded-bl-lg ltr:rounded-tl-lg rtl:rounded-tr-lg rtl:rounded-br-lg"
+                *matHeaderCellDef>
+              </th>
+              <td mat-cell class="text-center" class="cursor-pointer" *matCellDef="let element">
+                {{ element?.canBeCancelled ?? "-" }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-back" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+        2
+      </div>
+      <div class="tab-pane fade" id="nav-rejected" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+        3
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+      <div class="user-address" *ngFor="let userAdress of userAddresses">
+        <div class="user-address-header">
+          <h6>{{userAdress?.addressName}}</h6>
+          <mat-icon [svgIcon]="'sub-menu'" [matMenuTriggerFor]="dropdown" mat-icon-button
+            class="rounded-sm align-middle">
+          </mat-icon>
+          <mat-menu #dropdown="matMenu">
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/EditIcon.svg" />
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item class="matMenu-dropdown">
+              <img src="assets/images/delete.svg" />
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </div>
+        <div class="user-address-body">
+          <div class="d-flex gap-10 mt-3">
+            <div class="d-flex flex-column">
+              <h3>المدينة</h3>
+              <span>{{userAdress?.city}}</span>
+            </div>
+            <div class="d-flex flex-column">
+              <h3> الحي</h3>
+              <span>{{userAdress?.district}}</span>
+            </div>
+            <div class="d-flex flex-column">
+              <h3> اسم الشارع</h3>
+              <span>{{userAdress?.streetName}}</span>
+            </div>
+            <div class="d-flex flex-column">
+              <h3>نوع المبني</h3>
+              <span>{{userAdress?.buildingType}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
