@@ -1,38 +1,22 @@
-<div
-  class="flex flex-col overflow-x-hidden overflow-y-auto h-screen"
-  [ngClass]="{
+<div class="flex flex-col overflow-x-hidden overflow-y-auto h-screen" [ngClass]="{
     'flex-1': isSmwidth
-  }"
->
+  }">
   <app-header *ngIf="!hideHeader"></app-header>
   <div class="flex-1 flex" [class.flex-col]="isSmwidth">
-    <ga-extended-menu-nav
-      class="z-30 !bg-ga-page-bg"
-      *ngIf="!isSmwidth && !hideHeader"
-      [menuNodes]="menuNodes"
-      [currentPage]="currentPage$ | async"
-
-    >
+    <ga-extended-menu-nav class="z-30 !bg-ga-page-bg" *ngIf="!isSmwidth && !hideHeader" [menuNodes]="menuNodes"
+      [currentPage]="currentPage$ | async">
     </ga-extended-menu-nav>
 
-    <div
-      class="flex flex-col flex-1 w-full flex-auto overflow-y-auto px-4 py-8 md:px-8 bg-ga-page-bg"
-      [ngClass]="{ 'h-0': isSmwidth ,'bg-[url(assets/images/back-ground.svg)]': hideHeader}"
-    >
-      <div
-        class="relative flex-1 flex flex-col overflow-y-auto overflow-x-hidden  "
-      >
+    <div class="flex flex-col flex-1 w-full flex-auto overflow-y-auto px-4 py-8 md:px-8 bg-ga-page-bg"
+      [ngClass]="{ 'h-0': isSmwidth }">
+      <div class="relative flex-1 flex flex-col overflow-y-auto overflow-x-hidden  ">
         <router-outlet></router-outlet>
       </div>
       <app-footer *ngIf="!hideHeader"></app-footer>
     </div>
 
-    <ga-menu-nav
-      class="z-30"
-      *ngIf="isSmwidth && !hideHeader"
-      [menuNodes]="menuNodes"
-      [currentPage]="currentPage$ | async"
-    >
+    <ga-menu-nav class="z-30" *ngIf="isSmwidth && !hideHeader" [menuNodes]="menuNodes"
+      [currentPage]="currentPage$ | async">
     </ga-menu-nav>
   </div>
 </div>
