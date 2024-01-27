@@ -14,69 +14,55 @@ import { BreakpointService } from './shared/service/breakpoint/breakpoint.servic
 export class AppComponent {
   title = 'admin';
   hideHeader = true;
-  hideHeader = true;
   readonly currentPage$ = new BehaviorSubject<string | undefined>('');
   menuNodes = [new MenuNavNode(
     'الرئيسية',
     'dashboard',
     ['', ''],
     [],
-    menuNodes = [new MenuNavNode(
-      'الرئيسية',
-      'dashboard',
-      ['', ''],
-      [],
 
-    ),
-    new MenuNavNode(
-      'طلبات مقدمي الخدمات',
-      'organizations',
-      ['', '/'],
-      [],
+  ),
+  new MenuNavNode(
+    'طلبات مقدمي الخدمات',
+    'organizations',
+    ['', '/'],
+    [],
 
-    ),
-    new MenuNavNode(
-      'المستخدمين',
-      'tools',
-      ['', 'users'],
-      [],
+  ),
+  new MenuNavNode(
+    'المستخدمين',
+    'tools',
+    ['', 'users'],
+    [],
 
-    ),
-    new MenuNavNode(
-      'الاطباء',
-      'templates',
-      ['', 'doctors'],
-      [],
+  ),
+  new MenuNavNode(
+    'الاطباء',
+    'templates',
+    ['', 'doctors'],
+    [],
 
-    )
-      ,
-    new MenuNavNode(
-      'مقدمي الرعايه البيطرية',
-      'templates',
-      ['', 'veterinary-care'],
-      [],
+  )
+    ,
+  new MenuNavNode(
+    'مقدمي الرعايه البيطرية',
+    'templates',
+    ['', 'veterinary-care'],
+    [],
 
-    )
   )
 
   ]
   isSmwidth!: boolean;
   constructor(private readonly router: Router, private readonly iconService: IconService, private breakpointService: BreakpointService, private activatedRoute: ActivatedRoute) {
-    isSmwidth!: boolean;
-    constructor(private readonly router: Router, private readonly iconService: IconService, private breakpointService: BreakpointService, private activatedRoute: ActivatedRoute) {
-      this.initRouterEvents();
-      this.breakpointService.isMobile$.pipe(untilDestroyed(this))
-        .subscribe((isSmWidth: boolean) => {
-          this.isSmwidth = isSmWidth;
-        });
-      // Load custom icons
-      this.iconService.registerIcons();
+    this.initRouterEvents();
+    this.breakpointService.isMobile$.pipe(untilDestroyed(this))
       .subscribe((isSmWidth: boolean) => {
         this.isSmwidth = isSmWidth;
       });
-      // Load custom icons
-      this.iconService.registerIcons();
-    }
+    // Load custom icons
+    this.iconService.registerIcons();
+  }
 
   private readonly isNavigationEnd = (event: Event): event is NavigationEnd =>
     event instanceof NavigationEnd;
@@ -87,7 +73,6 @@ export class AppComponent {
         map((event) => (event.url || '')),
         untilDestroyed(this)
       )
-      .subscribe((currentPage: string | any) => {
       .subscribe((currentPage: string | any) => {
 
         if (currentPage.includes('auth')) {
@@ -100,12 +85,7 @@ export class AppComponent {
         } else {
           this.hideHeader = false;
         }
-        if (currentPage.includes('policy')) {
-          this.hideHeader = true;
-        } else {
-          this.hideHeader = false;
-        }
         this.currentPage$.next(currentPage);
       });
-      }
+  }
 }
